@@ -1,0 +1,1753 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>深圳市盛美特科技 - 高精度视觉传感器与工业相机</title>
+
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <style>
+        /* ===== 全局基础样式 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* ===== 导航栏过渡 ===== */
+        .navbar {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .navbar-scrolled {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .navbar-scrolled .nav-link {
+            color: #1e293b;
+        }
+
+        .navbar-scrolled .nav-link:hover {
+            color: #2563eb;
+        }
+
+        .navbar-scrolled .logo-text {
+            color: #1e293b;
+        }
+
+        /* ===== Hero 区域 ===== */
+        .hero-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 40%, #0f172a 100%);
+            position: relative;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(37, 99, 235, 0.12) 0%, transparent 60%),
+                radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 50% 80%, rgba(37, 99, 235, 0.08) 0%, transparent 50%);
+            animation: heroGlow 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroGlow {
+            0% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+        }
+
+        .hero-grid {
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        /* ===== 文字渐变 ===== */
+        .gradient-text {
+            background: linear-gradient(135deg, #60a5fa, #2563eb, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ===== 产品卡片 ===== */
+        .product-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(0);
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(37, 99, 235, 0.15);
+        }
+
+        .product-card .card-icon {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .product-card:hover .card-icon {
+            transform: scale(1.1) rotate(-4deg);
+        }
+
+        .product-card .card-line {
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: scaleX(0);
+            transform-origin: left;
+        }
+
+        .product-card:hover .card-line {
+            transform: scaleX(1);
+        }
+
+        /* ===== 案例轮播 ===== */
+        .case-slider {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .case-dot {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .case-dot.active {
+            background: #2563eb;
+            width: 2rem;
+        }
+
+        .case-dot:not(.active) {
+            background: #cbd5e1;
+            width: 0.75rem;
+        }
+
+        .case-dot:not(.active):hover {
+            background: #94a3b8;
+        }
+
+        /* ===== 滚动触发动画 ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .reveal-delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .reveal-delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        .reveal-delay-4 {
+            transition-delay: 0.4s;
+        }
+
+        /* ===== 数字滚动 ===== */
+        .stat-number {
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* ===== 分类筛选按钮 ===== */
+        .filter-btn {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .filter-btn.active {
+            background: #2563eb;
+            color: white;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.35);
+        }
+
+        .filter-btn:not(.active) {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+
+        .filter-btn:not(.active):hover {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+
+        /* ===== 响应式微调 ===== */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================================ -->
+    <!-- 导航栏 -->
+    <!-- ============================================================ -->
+    <nav id="navbar" class="navbar fixed top-0 left-0 right-0 z-50 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-2.5 group">
+                <div
+                    class="w-9 h-9 bg-gradient-to-br from-blue-600 to-blue-500 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/25 group-hover:shadow-blue-500/40 transition-shadow">
+                    <i class="fas fa-eye text-white text-sm"></i>
+                </div>
+                <span class="logo-text text-black font-bold text-lg tracking-tight transition-colors">深圳市盛美特科技</span>
+            </a>
+
+            <!-- 桌面导航 -->
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#hero"
+                    class="nav-link text-black/80 hover:text-white text-sm font-medium transition-colors relative group">
+                    首页
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#business"
+                    class="nav-link text-black/80 hover:text-white text-sm font-medium transition-colors relative group">
+                    业务范围
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#products"
+                    class="nav-link text-black/80 hover:text-white text-sm font-medium transition-colors relative group">
+                    产品中心
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#cases"
+                    class="nav-link text-black/80 hover:text-white text-sm font-medium transition-colors relative group">
+                    行业案例
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#about"
+                    class="nav-link text-black/80 hover:text-white text-sm font-medium transition-colors relative group">
+                    关于我们
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+            </div>
+
+            <!-- 右侧按钮 -->
+            <div class="flex items-center gap-3">
+                <a href="#contact"
+                    class="hidden sm:inline-block px-5 py-2 text-sm text-white/80 border border-white/20 rounded-full hover:bg-white/10 hover:text-white transition-all duration-300">
+                    联系我们
+                </a>
+                <a href="#products"
+                    class="px-5 py-2 text-sm bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-full hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-300">
+                    产品介绍
+                </a>
+                <!-- 移动端菜单按钮 -->
+                <button id="mobileMenuBtn" class="md:hidden text-white text-xl hover:text-blue-400 transition-colors">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- 移动端下拉菜单 -->
+        <div id="mobileMenu"
+            class="md:hidden hidden mt-4 bg-white/10 backdrop-blur-xl rounded-2xl p-4 border border-white/10">
+            <a href="#hero"
+                class="block py-2.5 text-white/80 hover:text-white text-sm font-medium transition-colors border-b border-white/5">首页</a>
+            <a href="#business"
+                class="block py-2.5 text-white/80 hover:text-white text-sm font-medium transition-colors border-b border-white/5">业务范围</a>
+            <a href="#products"
+                class="block py-2.5 text-white/80 hover:text-white text-sm font-medium transition-colors border-b border-white/5">产品中心</a>
+            <a href="#cases"
+                class="block py-2.5 text-white/80 hover:text-white text-sm font-medium transition-colors border-b border-white/5">行业案例</a>
+            <a href="#about"
+                class="block py-2.5 text-white/80 hover:text-white text-sm font-medium transition-colors">关于我们</a>
+        </div>
+    </nav>
+
+    <!-- ============================================================ -->
+    <!-- Hero 区域 -->
+    <!-- ============================================================ -->
+    <section id="hero" class="hero-bg hero-grid min-h-screen flex items-center relative overflow-hidden pt-20">
+        <!-- 装饰光晕 -->
+        <div class="absolute top-1/4 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-1/4 left-1/4 w-80 h-80 bg-purple-600/8 rounded-full blur-3xl"></div>
+
+        <div class="relative z-10 w-full max-w-7xl mx-auto px-6 py-12">
+            <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12">
+                <!-- 左侧主标题 -->
+                <div class="w-full lg:w-3/5 space-y-4">
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-medium">
+                        <span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
+                        高精度视觉解决方案
+                    </div>
+
+                    <h1 style="line-height: 1.25;"
+                        class="hero-title text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-[1.1]">
+                        <span class="gradient-text">工业视觉</span>
+                        <br />
+
+                        <span class="gradient-text">产线慧眼</span>
+                        <br />
+
+                        <span class="gradient-text">智能制造</span>
+                    </h1>
+
+                    <p class="text-lg sm:text-xl text-slate-300 max-w-lg leading-relaxed">
+                        高精度视觉传感器与工业相机解决方案提供商
+                        <br class="hidden sm:block" />
+                        赋能智能制造，驱动产业升级
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <a href="#products"
+                            class="px-8 py-3.5 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-full font-medium hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 flex items-center gap-2">
+                            探索产品
+                            <i class="fas fa-arrow-right text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 右侧数据看板 -->
+                <div class="w-full lg:w-2/5 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div
+                        class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 text-center border border-white/10 hover:bg-white/10 transition-all duration-300 group">
+                        <div class="stat-number text-4xl font-bold text-blue-400 group-hover:text-blue-300 transition-colors"
+                            data-target="500">0</div>
+                        <div class="text-sm text-slate-400 mt-1">服务客户</div>
+                        <div class="text-xs text-slate-500">+ 全国覆盖</div>
+                    </div>
+                    <div
+                        class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 text-center border border-white/10 hover:bg-white/10 transition-all duration-300 group">
+                        <div class="stat-number text-4xl font-bold text-blue-400 group-hover:text-blue-300 transition-colors"
+                            data-target="100">0</div>
+                        <div class="text-sm text-slate-400 mt-1">产品型号</div>
+                        <div class="text-xs text-slate-500">+ 持续创新</div>
+                    </div>
+                    <div
+                        class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 text-center border border-white/10 hover:bg-white/10 transition-all duration-300 group">
+                        <div class="stat-number text-4xl font-bold text-blue-400 group-hover:text-blue-300 transition-colors"
+                            data-target="120">0</div>
+                        <div class="text-sm text-slate-400 mt-1">应用场景</div>
+                        <div class="text-xs text-slate-500">+ 行业覆盖</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部滚动指示 -->
+        <div
+            class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-500 text-xs animate-bounce">
+            <span>向下滚动</span>
+            <i class="fas fa-chevron-down text-sm"></i>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 业务范围 -->
+    <!-- ============================================================ -->
+    <section id="business" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- 标题 -->
+            <div class="text-center mb-16 reveal">
+                <span
+                    class="inline-block px-4 py-1.5 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold tracking-wider">BUSINESS
+                    SCOPE</span>
+                <h2 class="text-4xl sm:text-5xl font-bold text-slate-900 mt-4 leading-tight">
+                    专注工业视觉 <br class="sm:hidden" />
+                    <span class="gradient-text">赋能智能制造</span>
+                </h2>
+                <p class="text-slate-500 max-w-2xl mx-auto mt-3 text-lg">
+                    深耕智能制造，推动产线智能化
+                </p>
+            </div>
+
+            <!-- 业务卡片网格 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 业务 1 -->
+                <div
+                    class="reveal reveal-delay-1 bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-500 border border-slate-100 hover:border-blue-200 group">
+                    <div
+                        class="w-14 h-14 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl flex items-center justify-center text-2xl text-blue-600 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mt-5">工业相机方案选型</h3>
+                    <p class="text-slate-500 mt-2 leading-relaxed">为客户量身选型，满足客户对于高精度测量、定位、检测的工业场景需求</p>
+
+                </div>
+
+                <!-- 业务 2 -->
+                <div
+                    class="reveal reveal-delay-2 bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-500 border border-slate-100 hover:border-blue-200 group">
+                    <div
+                        class="w-14 h-14 bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl flex items-center justify-center text-2xl text-purple-600 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mt-5">智能产品线</h3>
+                    <p class="text-slate-500 mt-2 leading-relaxed">丰富的智能产品线，嵌入式高度集成，迷你身材强大性能，适应各类紧凑工位的简易应用</p>
+
+                </div>
+
+                <!-- 业务 3 -->
+                <div
+                    class="reveal reveal-delay-1 bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-500 border border-slate-100 hover:border-blue-200 group">
+                    <div
+                        class="w-14 h-14 bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl flex items-center justify-center text-2xl text-orange-600 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mt-5">光学打光评估</h3>
+                    <p class="text-slate-500 mt-2 leading-relaxed">提供专业的光学打光评估，为视觉慧眼亮一盏明灯</p>
+
+                </div>
+
+                <!-- 业务 3 -->
+                <div
+                    class="reveal reveal-delay-3 bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-500 border border-slate-100 hover:border-blue-200 group">
+                    <div
+                        class="w-14 h-14 bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-2xl flex items-center justify-center text-2xl text-cyan-600 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-cubes"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mt-5">机器视觉系统集成</h3>
+                    <p class="text-slate-500 mt-2 leading-relaxed">提供完整的机器视觉系统集成服务，包括硬件、软件及算法落地</p>
+
+                </div>
+
+                <!-- 业务 4 -->
+                <div
+                    class="reveal reveal-delay-1 bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-500 border border-slate-100 hover:border-blue-200 group">
+                    <div
+                        class="w-14 h-14 bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl flex items-center justify-center text-2xl text-orange-600 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mt-5">技术培训与支持</h3>
+                    <p class="text-slate-500 mt-2 leading-relaxed">提供专业的技术培训和技术支持服务</p>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 核心产品 -->
+    <!-- ============================================================ -->
+    <section id="products" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- 标题 -->
+            <div class="text-center mb-12 reveal">
+                <span
+                    class="inline-block px-4 py-1.5 bg-orange-100 text-orange-700 rounded-full text-xs font-semibold tracking-wider">PRODUCTS</span>
+                <h2 class="text-4xl sm:text-5xl font-bold text-slate-900 mt-4 leading-tight">
+                    核心产品系列 <br class="sm:hidden" />
+                    <span class="text-orange-500">满足多场景需求</span>
+                </h2>
+                <p class="text-slate-500 max-w-xl mx-auto mt-3">从入门到高端，提供全系列工业视觉解决方案，助力智能制造升级</p>
+            </div>
+
+            <!-- 分类筛选 -->
+            <div class="flex flex-wrap items-center justify-center gap-2 mb-10 reveal">
+                <button class="filter-btn active px-5 py-2 rounded-full text-sm font-medium transition-all"
+                    data-filter="all">全部</button>
+                <button class="filter-btn px-5 py-2 rounded-full text-sm font-medium transition-all"
+                    data-filter="camera">相机系列</button>
+                <button class="filter-btn px-5 py-2 rounded-full text-sm font-medium transition-all"
+                    data-filter="barcode">读码系列</button>
+                <button class="filter-btn px-5 py-2 rounded-full text-sm font-medium transition-all"
+                    data-filter="system">系统方案</button>
+                <button class="filter-btn px-5 py-2 rounded-full text-sm font-medium transition-all"
+                    data-filter="accessory">配件组件</button>
+            </div>
+
+            <!-- 产品网格 -->
+            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- 产品 1: 工业相机 -->
+                <div class="product-card bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm group"
+                    data-category="camera">
+                    <div
+                        class="relative h-48 bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center">
+                        <div
+                            class="card-icon w-20 h-20 rounded-full bg-blue-500/10 flex items-center justify-center text-4xl text-blue-600">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <span
+                            class="absolute top-3 right-3 px-2.5 py-0.5 bg-orange-500 text-white text-[10px] font-bold rounded-full">HOT</span>
+                        <span
+                            class="absolute bottom-3 left-3 px-2.5 py-0.5 bg-white/80 backdrop-blur-sm text-slate-400 text-[10px] rounded-full border border-slate-100">相机系列</span>
+                        <div
+                            class="card-line absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-blue-500 to-blue-400 w-full">
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-base font-bold text-slate-900">工业相机</h3>
+                        <p class="text-xs text-slate-400 mt-1">分辨率全、接口丰富、工艺严苛</p>
+                        <div class="flex flex-wrap gap-1 mt-3">
+                            <span
+                                class="text-[10px] bg-slate-50 text-slate-400 px-2 py-0.5 rounded border border-slate-100">高速拍摄</span>
+                            <span
+                                class="text-[10px] bg-slate-50 text-slate-400 px-2 py-0.5 rounded border border-slate-100">抗干扰</span>
+                        </div>
+                        <a href="#"
+                            class="inline-flex items-center gap-1 text-xs font-semibold text-slate-300 group-hover:text-blue-600 transition-colors mt-3">
+                            了解更多 <i class="fas fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 产品 2: 智能相机 -->
+                <div class="product-card bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm group"
+                    data-category="camera">
+                    <div
+                        class="relative h-48 bg-gradient-to-br from-purple-50 to-indigo-50 flex items-center justify-center">
+                        <div
+                            class="card-icon w-20 h-20 rounded-full bg-purple-500/10 flex items-center justify-center text-4xl text-purple-600">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <span
+                            class="absolute top-3 right-3 px-2.5 py-0.5 bg-emerald-500 text-white text-[10px] font-bold rounded-full">NEW</span>
+                        <span
+                            class="absolute bottom-3 left-3 px-2.5 py-0.5 bg-white/80 backdrop-blur-sm text-slate-400 text-[10px] rounded-full border border-slate-100">相机系列</span>
+                        <div
+                            class="card-line absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-purple-500 to-purple-400 w-full">
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-base font-bold text-slate-900">智能相机</h3>
+                        <p class="text-xs text-slate-400 mt-1">高度集成、轻松解决各类有无/分类检测应用</p>
+                        <div class="flex flex-wrap gap-1 mt-3">
+                            <span
+                                class="text-[10px] bg-slate-50 text-slate-400 px-2 py-0.5 rounded border border-slate-100">有无检测</span>
+                            <span
+                                class="text-[10px] bg-slate-50 text-slate-400 px-2 py-0.5 rounded border border-slate-100">自动对焦</span>
+                        </div>
+                        <a href="#"
+                            class="inline-flex items-center gap-1 text-xs font-semibold text-slate-300 group-hover:text-purple-600 transition-colors mt-3">
+                            了解更多 <i class="fas fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 产品 3: 智能视觉系统 -->
+                <div class="product-card bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm group"
+                    data-category="system">
+                    <div
+                        class="relative h-48 bg-gradient-to-br from-cyan-50 to-sky-50 flex items-center justify-center">
+                        <div
+                            class="card-icon w-20 h-20 rounded-full bg-cyan-500/10 flex items-center justify-center text-4xl text-cyan-600">
+                            <i class="fas fa-hard-drive"></i>
+                        </div>
+                        <span
+                            class="absolute bottom-3 left-3 px-2.5 py-0.5 bg-white/80 backdrop-blur-sm text-slate-400 text-[10px] rounded-full border border-slate-100">系统方案</span>
+                        <div
+                            class="card-line absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-cyan-500 to-cyan-400 w-full">
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-base font-bold text-slate-900">智能视觉系统</h3>
+                        <p class="text-xs text-slate-400 mt-1">AI检测、接口丰富、稳定易用</p>
+                        <div class="flex flex-wrap gap-1 mt-3">
+                            <span
+                                class="text-[10px] bg-slate-50 text-slate-400 px-2 py-0.5 rounded border border-slate-100">多传感器融合</span>
+                            <span
+                                class="text-[10px] bg-slate-50 text-slate-400 px-2 py-0.5 rounded border border-slate-100">高可靠性</span>
+                        </div>
+                        <a href="#"
+                            class="inline-flex items-center gap-1 text-xs font-semibold text-slate-300 group-hover:text-cyan-600 transition-colors mt-3">
+                            了解更多 <i class="fas fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 产品 4: 固定式读码器 -->
+                <div class="product-card bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm group"
+                    data-category="barcode">
+                    <div
+                        class="relative h-48 bg-gradient-to-br from-amber-50 to-yellow-50 flex items-center justify-center">
+                        <div
+                            class="card-icon w-20 h-20 rounded-full bg-amber-500/10 flex items-center justify-center text-4xl text-amber-600">
+                            <i class="fas fa-qrcode"></i>
+                        </div>
+                        <span
+                            class="absolute top-3 right-3 px-2.5 py-0.5 bg-orange-500 text-white text-[10px] font-bold rounded-full">HOT</span>
+                        <span
+                            class="absolute bottom-3 left-3 px-2.5 py-0.5 bg-white/80 backdrop-blur-sm text-slate-400 text-[10px] rounded-full border border-slate-100">读码系列</span>
+                        <div
+                            class="card-line absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-amber-500 to-amber-400 w-full">
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-base font-bold text-slate-900">固定式读码器</h3>
+                        <p class="text-xs text-slate-400 mt-1">深度学习、出色解码、超大覆盖</p>
+                        <div class="flex flex-wrap gap-1 mt-3">
+                            <span
+                                class="text-[10px] bg-slate-50 text-slate-400 px-2 py-0.5 rounded border border-slate-100">高速读取</span>
+                            <span
+                                class="text-[10px] bg-slate-50 text-slate-400 px-2 py-0.5 rounded border border-slate-100">长距离</span>
+                        </div>
+                        <a href="#"
+                            class="inline-flex items-center gap-1 text-xs font-semibold text-slate-300 group-hover:text-amber-600 transition-colors mt-3">
+                            了解更多 <i class="fas fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 产品 5: 手持读码器 -->
+                <div class="product-card bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm group"
+                    data-category="barcode">
+                    <div
+                        class="relative h-48 bg-gradient-to-br from-teal-50 to-emerald-50 flex items-center justify-center">
+                        <div
+                            class="card-icon w-20 h-20 rounded-full bg-teal-500/10 flex items-center justify-center text-4xl text-teal-600">
+                            <i class="fas fa-hand-holding"></i>
+                        </div>
+                        <span
+                            class="absolute bottom-3 left-3 px-2.5 py-0.5 bg-white/80 backdrop-blur-sm text-slate-400 text-[10px] rounded-full border border-slate-100">读码系列</span>
+                        <div
+                            class="card-line absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-teal-500 to-teal-400 w-full">
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-base font-bold text-slate-900">手持读码器</h3>
+                        <p class="text-xs text-slate-400 mt-1">便携性强、适用范围广、简单易用</p>
+                        <div class="flex flex-wrap gap-1 mt-3">
+                            <span
+                                class="text-[10px] bg-slate-50 text-slate-400 px-2 py-0.5 rounded border border-slate-100">无线连接</span>
+                            <span
+                                class="text-[10px] bg-slate-50 text-slate-400 px-2 py-0.5 rounded border border-slate-100">智能解码</span>
+                        </div>
+                        <a href="#"
+                            class="inline-flex items-center gap-1 text-xs font-semibold text-slate-300 group-hover:text-teal-600 transition-colors mt-3">
+                            了解更多 <i class="fas fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 产品 6: 3D激光轮廓传感器 -->
+                <div class="product-card bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm group"
+                    data-category="camera">
+                    <div
+                        class="relative h-48 bg-gradient-to-br from-indigo-50 to-blue-50 flex items-center justify-center">
+                        <div
+                            class="card-icon w-20 h-20 rounded-full bg-indigo-500/10 flex items-center justify-center text-4xl text-indigo-600">
+                            <i class="fas fa-cubes"></i>
+                        </div>
+                        <span
+                            class="absolute top-3 right-3 px-2.5 py-0.5 bg-emerald-500 text-white text-[10px] font-bold rounded-full">NEW</span>
+                        <span
+                            class="absolute bottom-3 left-3 px-2.5 py-0.5 bg-white/80 backdrop-blur-sm text-slate-400 text-[10px] rounded-full border border-slate-100">相机系列</span>
+                        <div
+                            class="card-line absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-indigo-500 to-indigo-400 w-full">
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-base font-bold text-slate-900">3D激光轮廓传感器</h3>
+                        <p class="text-xs text-slate-400 mt-1">算法内置、高速输出、灵活配置</p>
+                        <div class="flex flex-wrap gap-1 mt-3">
+                            <span
+                                class="text-[10px] bg-slate-50 text-slate-400 px-2 py-0.5 rounded border border-slate-100">线激光</span>
+                            <span
+                                class="text-[10px] bg-slate-50 text-slate-400 px-2 py-0.5 rounded border border-slate-100">深度感知</span>
+                        </div>
+                        <a href="#"
+                            class="inline-flex items-center gap-1 text-xs font-semibold text-slate-300 group-hover:text-indigo-600 transition-colors mt-3">
+                            了解更多 <i class="fas fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 产品 7: 工控机 -->
+                <div class="product-card bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm group"
+                    data-category="system">
+                    <div
+                        class="relative h-48 bg-gradient-to-br from-slate-50 to-slate-200 flex items-center justify-center">
+                        <div
+                            class="card-icon w-20 h-20 rounded-full bg-slate-500/10 flex items-center justify-center text-4xl text-slate-600">
+                            <i class="fas fa-computer"></i>
+                        </div>
+                        <span
+                            class="absolute bottom-3 left-3 px-2.5 py-0.5 bg-white/80 backdrop-blur-sm text-slate-400 text-[10px] rounded-full border border-slate-100">系统方案</span>
+                        <div
+                            class="card-line absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-slate-500 to-slate-400 w-full">
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-base font-bold text-slate-900">工控机</h3>
+                        <p class="text-xs text-slate-400 mt-1">性能卓越、灵活扩展、高效稳定</p>
+                        <div class="flex flex-wrap gap-1 mt-3">
+                            <span
+                                class="text-[10px] bg-slate-50 text-slate-400 px-2 py-0.5 rounded border border-slate-100">高可靠性</span>
+                            <span
+                                class="text-[10px] bg-slate-50 text-slate-400 px-2 py-0.5 rounded border border-slate-100">可定制</span>
+                        </div>
+                        <a href="#"
+                            class="inline-flex items-center gap-1 text-xs font-semibold text-slate-300 group-hover:text-slate-600 transition-colors mt-3">
+                            了解更多 <i class="fas fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 产品 8: 视觉组件 -->
+                <div class="product-card bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm group"
+                    data-category="accessory">
+                    <div
+                        class="relative h-48 bg-gradient-to-br from-rose-50 to-pink-50 flex items-center justify-center">
+                        <div
+                            class="card-icon w-20 h-20 rounded-full bg-rose-500/10 flex items-center justify-center text-4xl text-rose-600">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <span
+                            class="absolute top-3 right-3 px-2.5 py-0.5 bg-orange-500 text-white text-[10px] font-bold rounded-full">HOT</span>
+                        <span
+                            class="absolute bottom-3 left-3 px-2.5 py-0.5 bg-white/80 backdrop-blur-sm text-slate-400 text-[10px] rounded-full border border-slate-100">配件组件</span>
+                        <div
+                            class="card-line absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-rose-500 to-rose-400 w-full">
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-base font-bold text-slate-900">视觉组件</h3>
+                        <p class="text-xs text-slate-400 mt-1">高性价比、品类齐全、服务完善</p>
+                        <div class="flex flex-wrap gap-1 mt-3">
+                            <span
+                                class="text-[10px] bg-slate-50 text-slate-400 px-2 py-0.5 rounded border border-slate-100">模块化</span>
+                            <span
+                                class="text-[10px] bg-slate-50 text-slate-400 px-2 py-0.5 rounded border border-slate-100">性能优化</span>
+                        </div>
+                        <a href="#"
+                            class="inline-flex items-center gap-1 text-xs font-semibold text-slate-300 group-hover:text-rose-600 transition-colors mt-3">
+                            了解更多 <i class="fas fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 产品 9: 相机镜头 (新增) -->
+                <div class="product-card bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm group"
+                    data-category="accessory">
+                    <div
+                        class="relative h-48 bg-gradient-to-br from-violet-50 to-purple-50 flex items-center justify-center">
+                        <div
+                            class="card-icon w-20 h-20 rounded-full bg-violet-500/10 flex items-center justify-center text-4xl text-violet-600">
+                            <i class="fas fa-microscope"></i>
+                        </div>
+                        <span
+                            class="absolute top-3 right-3 px-2.5 py-0.5 bg-emerald-500 text-white text-[10px] font-bold rounded-full">NEW</span>
+                        <span
+                            class="absolute bottom-3 left-3 px-2.5 py-0.5 bg-white/80 backdrop-blur-sm text-slate-400 text-[10px] rounded-full border border-slate-100">配件组件</span>
+                        <div
+                            class="card-line absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-violet-500 to-violet-400 w-full">
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-base font-bold text-slate-900">相机镜头</h3>
+                        <p class="text-xs text-slate-400 mt-1">高解析度、多焦距、适配主流工业相机</p>
+                        <div class="flex flex-wrap gap-1 mt-3">
+                            <span
+                                class="text-[10px] bg-slate-50 text-slate-400 px-2 py-0.5 rounded border border-slate-100">定焦/变焦</span>
+                            <span
+                                class="text-[10px] bg-slate-50 text-slate-400 px-2 py-0.5 rounded border border-slate-100">低畸变</span>
+
+                            <span
+                                class="text-[10px] bg-slate-50 text-slate-400 px-2 py-0.5 rounded border border-slate-100">高分辨率</span>
+                        </div>
+                        <a href="#"
+                            class="inline-flex items-center gap-1 text-xs font-semibold text-slate-300 group-hover:text-violet-600 transition-colors mt-3">
+                            了解更多 <i class="fas fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 行业案例 -->
+    <!-- ============================================================ -->
+    <section id="cases" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-14 reveal">
+                <span
+                    class="inline-block px-4 py-1.5 bg-emerald-100 text-emerald-700 rounded-full text-xs font-semibold tracking-wider">SUCCESS
+                    CASES</span>
+                <h2 class="text-4xl sm:text-5xl font-bold text-slate-900 mt-4 leading-tight">
+                    行业应用案例
+                </h2>
+                <p class="text-slate-500 max-w-xl mx-auto mt-3">覆盖汽车、电子、医药、食品等多个行业</p>
+            </div>
+
+            <!-- 案例轮播容器 -->
+            <div class="relative overflow-hidden rounded-3xl bg-white shadow-xl">
+                <div id="caseSlider" class="case-slider flex transition-transform duration-700 ease-out">
+                    <!-- 案例 1 -->
+                    <div class="min-w-full p-8 md:p-12">
+                        <div class="flex flex-col md:flex-row gap-8 items-center">
+                            <div class="w-full md:w-1/3">
+                                <div
+                                    class="aspect-video bg-gradient-to-br from-blue-500/20 to-blue-600/5 rounded-2xl flex items-center justify-center text-6xl text-blue-500/30">
+                                    <i class="fas fa-car"></i>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-2/3">
+                                <span
+                                    class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full">汽车制造</span>
+                                <h3 class="text-2xl font-bold text-slate-900 mt-3">汽车减速机壳体胶路检测</h3>
+                                <p class="text-slate-500 mt-2 leading-relaxed">实现智能化点胶检测，缺陷识别率达99.8%，胶路形态多变范围大</p>
+                                <div class="flex gap-6 mt-4">
+                                    <div><span class="text-2xl font-bold text-blue-600">99.8%</span><span
+                                            class="text-xs text-slate-400 block">识别率</span></div>
+                                    <div><span class="text-2xl font-bold text-blue-600">13+</span><span
+                                            class="text-xs text-slate-400 block">兼容检测类型</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button data-case-index="0"
+                            class="open-case-btn inline-flex items-center gap-1 text-xs font-semibold text-slate-300 group-hover:text-blue-600 transition-colors mt-3">
+                            了解更多 <i class="fas fa-arrow-right text-[10px]"></i>
+                        </button>
+                    </div>
+
+                    <!-- 案例 2 -->
+                    <div class="min-w-full p-8 md:p-12">
+                        <div class="flex flex-col md:flex-row gap-8 items-center">
+                            <div class="w-full md:w-1/3">
+                                <div
+                                    class="aspect-video bg-gradient-to-br from-purple-500/20 to-purple-600/5 rounded-2xl flex items-center justify-center text-6xl text-purple-500/30">
+                                    <i class="fas fa-microchip"></i>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-2/3">
+                                <span
+                                    class="inline-block px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">3C电子行业</span>
+                                <h3 class="text-2xl font-bold text-slate-900 mt-3">PCB板自动光学检测筛选系统</h3>
+                                <p class="text-slate-500 mt-2 leading-relaxed">节约产线人工成本，自动检测分筛录入MES</p>
+                                <div class="flex gap-6 mt-4">
+                                    <div><span class="text-2xl font-bold text-purple-600">300%</span><span
+                                            class="text-xs text-slate-400 block">速度提升</span></div>
+                                    <div><span class="text-2xl font-bold text-purple-600">70%</span><span
+                                            class="text-xs text-slate-400 block">成本降低</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button data-case-index="1"
+                            class="open-case-btn inline-flex items-center gap-1 text-xs font-semibold text-slate-300 group-hover:text-blue-600 transition-colors mt-3">
+                            了解更多 <i class="fas fa-arrow-right text-[10px]"></i>
+                        </button>
+                    </div>
+
+                    <!-- 案例 3 -->
+                    <div class="min-w-full p-8 md:p-12">
+                        <div class="flex flex-col md:flex-row gap-8 items-center">
+                            <div class="w-full md:w-1/3">
+                                <div
+                                    class="aspect-video bg-gradient-to-br from-emerald-500/20 to-emerald-600/5 rounded-2xl flex items-center justify-center text-6xl text-emerald-500/30">
+                                    <i class="fas fa-capsules"></i>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-2/3">
+                                <span
+                                    class="inline-block px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-semibold rounded-full">医药行业</span>
+                                <h3 class="text-2xl font-bold text-slate-900 mt-3">动态血糖仪发射器读码</h3>
+                                <p class="text-slate-500 mt-2 leading-relaxed">二维码打在透明壳上底部强反光，利用光学硬件优化成像</p>
+                                <div class="flex gap-6 mt-4">
+                                    <div><span class="text-2xl font-bold text-emerald-600">99.999%</span><span
+                                            class="text-xs text-slate-400 block">解码成功率</span></div>
+                                    <div><span class="text-2xl font-bold text-emerald-600">250ms</span><span
+                                            class="text-xs text-slate-400 block">运行CT</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button data-case-index="2"
+                            class="open-case-btn inline-flex items-center gap-1 text-xs font-semibold text-slate-300 group-hover:text-blue-600 transition-colors mt-3">
+                            了解更多 <i class="fas fa-arrow-right text-[10px]"></i>
+                        </button>
+                    </div>
+
+                    <!-- 案例 4 -->
+                    <div class="min-w-full p-8 md:p-12">
+                        <div class="flex flex-col md:flex-row gap-8 items-center">
+                            <div class="w-full md:w-1/3">
+                                <div
+                                    class="aspect-video bg-gradient-to-br from-orange-500/20 to-orange-600/5 rounded-2xl flex items-center justify-center text-6xl text-orange-500/30">
+                                    <i class="fas fa-utensils"></i>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-2/3">
+                                <span
+                                    class="inline-block px-3 py-1 bg-orange-100 text-orange-700 text-xs font-semibold rounded-full">食品行业</span>
+                                <h3 class="text-2xl font-bold text-slate-900 mt-3">食品包装飞拍</h3>
+                                <p class="text-slate-500 mt-2 leading-relaxed">终端生产装箱打包读码，保障食品可追溯，提高食品安全</p>
+                                <div class="flex gap-6 mt-4">
+                                    <div><span class="text-2xl font-bold text-orange-600">200mm/s</span><span
+                                            class="text-xs text-slate-400 block">飞拍速度</span></div>
+                                    <div><span class="text-2xl font-bold text-orange-600">30+</span><span
+                                            class="text-xs text-slate-400 block">产品兼容</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button data-case-index="3"
+                            class="open-case-btn inline-flex items-center gap-1 text-xs font-semibold text-slate-300 group-hover:text-blue-600 transition-colors mt-3">
+                            了解更多 <i class="fas fa-arrow-right text-[10px]"></i>
+                        </button>
+                    </div>
+
+                    <!-- 案例 5 -->
+                    <div class="min-w-full p-8 md:p-12">
+                        <div class="flex flex-col md:flex-row gap-8 items-center">
+                            <div class="w-full md:w-1/3">
+                                <div
+                                    class="aspect-video bg-gradient-to-br from-cyan-500/20 to-cyan-600/5 rounded-2xl flex items-center justify-center text-6xl text-cyan-500/30">
+                                    <i class="fas fa-bacteria"></i>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-2/3">
+                                <span
+                                    class="inline-block px-3 py-1 bg-cyan-100 text-cyan-700 text-xs font-semibold rounded-full">汽车行业</span>
+                                <h3 class="text-2xl font-bold text-slate-900 mt-3">汽车电驱胶路检测</h3>
+                                <p class="text-slate-500 mt-2 leading-relaxed">使用3D线激光轮廓仪，检测点胶有无断胶、少胶、胶宽异常</p>
+                                <div class="flex gap-6 mt-4">
+                                    <div><span class="text-2xl font-bold text-cyan-600">150mm/s</span><span
+                                            class="text-xs text-slate-400 block">扫描速度</span></div>
+                                    <div><span class="text-2xl font-bold text-cyan-600">0.005%</span><span
+                                            class="text-xs text-slate-400 block">漏检率</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button data-case-index="4"
+                            class="open-case-btn inline-flex items-center gap-1 text-xs font-semibold text-slate-300 group-hover:text-blue-600 transition-colors mt-3">
+                            了解更多 <i class="fas fa-arrow-right text-[10px]"></i>
+                        </button>
+                    </div>
+
+                    <!-- 案例 6 -->
+                    <div class="min-w-full p-8 md:p-12">
+                        <div class="flex flex-col md:flex-row gap-8 items-center">
+                            <div class="w-full md:w-1/3">
+                                <div
+                                    class="aspect-video bg-gradient-to-br from-rose-500/20 to-rose-600/5 rounded-2xl flex items-center justify-center text-6xl text-rose-500/30">
+                                    <i class="fas fa-scroll"></i>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-2/3">
+                                <span
+                                    class="inline-block px-3 py-1 bg-rose-100 text-rose-700 text-xs font-semibold rounded-full">锂电行业</span>
+                                <h3 class="text-2xl font-bold text-slate-900 mt-3">铜箔卷料检测</h3>
+                                <p class="text-slate-500 mt-2 leading-relaxed">表面缺陷检测，输出缺陷信息，有助于指导后续工艺优化，有效赋能生产管理</p>
+                                <div class="flex gap-6 mt-4">
+                                    <div><span class="text-2xl font-bold text-rose-600">99.9%</span><span
+                                            class="text-xs text-slate-400 block">良品率</span></div>
+                                    <div><span class="text-2xl font-bold text-rose-600">2.5D</span><span
+                                            class="text-xs text-slate-400 block">表面细小缺陷</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button data-case-index="5"
+                            class="open-case-btn inline-flex items-center gap-1 text-xs font-semibold text-slate-300 group-hover:text-blue-600 transition-colors mt-3">
+                            了解更多 <i class="fas fa-arrow-right text-[10px]"></i>
+                        </button>
+                    </div>
+
+                    <!-- 案例 7 -->
+                    <div class="min-w-full p-8 md:p-12">
+                        <div class="flex flex-col md:flex-row gap-8 items-center">
+                            <div class="w-full md:w-1/3">
+                                <div
+                                    class="aspect-video bg-gradient-to-br from-orange-500/20 to-orange-600/5 rounded-2xl flex items-center justify-center text-6xl text-orange-500/30">
+                                    <i class="fas fa-tablet-screen-button"></i>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-2/3">
+                                <span
+                                    class="inline-block px-3 py-1 bg-rose-100 text-rose-700 text-xs font-semibold rounded-full">消费电子</span>
+                                <h3 class="text-2xl font-bold text-slate-900 mt-3">平板CG盖板抓取</h3>
+                                <p class="text-slate-500 mt-2 leading-relaxed">某品牌平板面板对面板边缘涂黑，需要将面板上料至工作区域</p>
+                                <div class="flex gap-6 mt-4">
+                                    <div><span class="text-2xl font-bold text-rose-600">±0.1mm</span><span
+                                            class="text-xs text-slate-400 block">抓取精度</span></div>
+                                    <div><span class="text-2xl font-bold text-rose-600">300ms</span><span
+                                            class="text-xs text-slate-400 block">视觉CT</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button data-case-index="6"
+                            class="open-case-btn inline-flex items-center gap-1 text-xs font-semibold text-slate-300 group-hover:text-blue-600 transition-colors mt-3">
+                            了解更多 <i class="fas fa-arrow-right text-[10px]"></i>
+                        </button>
+                    </div>
+
+
+                    <!-- 案例 8 -->
+                    <div class="min-w-full p-8 md:p-12">
+                        <div class="flex flex-col md:flex-row gap-8 items-center">
+                            <div class="w-full md:w-1/3">
+                                <div
+                                    class="aspect-video bg-gradient-to-br from-purple-500/20 to-purple-600/5 rounded-2xl flex items-center justify-center text-6xl text-purple-500/30">
+                                    <i class="fas fa-battery-half"></i>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-2/3">
+                                <span
+                                    class="inline-block px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">消费电子</span>
+                                <h3 class="text-2xl font-bold text-slate-900 mt-3">充电宝盖板异物检测</h3>
+                                <p class="text-slate-500 mt-2 leading-relaxed">某品牌充电宝需检测螺丝是否打好、外壳中是否有螺丝异物，防止后段电池组装报废</p>
+                                <div class="flex gap-6 mt-4">
+                                    <div><span class="text-2xl font-bold text-purple-600">200%</span><span
+                                            class="text-xs text-slate-400 block">速度提升</span></div>
+                                    <div><span class="text-2xl font-bold text-purple-600">140%</span><span
+                                            class="text-xs text-slate-400 block">成本降低</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button data-case-index="7"
+                            class="open-case-btn inline-flex items-center gap-1 text-xs font-semibold text-slate-300 group-hover:text-blue-600 transition-colors mt-3">
+                            了解更多 <i class="fas fa-arrow-right text-[10px]"></i>
+                        </button>
+                    </div>
+
+                    <!-- 案例 9 -->
+                    <div class="min-w-full p-8 md:p-12">
+                        <div class="flex flex-col md:flex-row gap-8 items-center">
+                            <div class="w-full md:w-1/3">
+                                <div
+                                    class="aspect-video bg-gradient-to-br from-cyan-500/20 to-cyan-600/5 rounded-2xl flex items-center justify-center text-6xl text-cyan-500/30">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-2/3">
+                                <span
+                                    class="inline-block px-3 py-1 bg-cyan-100 text-cyan-700 text-xs font-semibold rounded-full">锂电行业</span>
+                                <h3 class="text-2xl font-bold text-slate-900 mt-3">方壳电池焊接外观检3D</h3>
+                                <p class="text-slate-500 mt-2 leading-relaxed">使用3D线激光轮廓仪，电芯入壳后进行预点焊，检测焊缝宽度和台阶高度</p>
+                                <div class="flex gap-6 mt-4">
+                                    <div><span class="text-2xl font-bold text-cyan-600">100mm/s</span><span
+                                            class="text-xs text-slate-400 block">扫描速度</span></div>
+                                    <div><span class="text-2xl font-bold text-cyan-600">0.01mm</span><span
+                                            class="text-xs text-slate-400 block">高度重复性精度</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button data-case-index="8"
+                            class="open-case-btn inline-flex items-center gap-1 text-xs font-semibold text-slate-300 group-hover:text-blue-600 transition-colors mt-3">
+                            了解更多 <i class="fas fa-arrow-right text-[10px]"></i>
+                        </button>
+                    </div>
+
+
+                </div>
+
+                <!-- 轮播控制按钮 -->
+                <button id="casePrev"
+                    class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-slate-700 hover:bg-white transition-all duration-300 hover:scale-105">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button id="caseNext"
+                    class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-slate-700 hover:bg-white transition-all duration-300 hover:scale-105">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+
+                <!-- 底部指示点 -->
+                <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                    <span class="case-dot active" data-index="0"></span>
+                    <span class="case-dot" data-index="1"></span>
+                    <span class="case-dot" data-index="2"></span>
+                    <span class="case-dot" data-index="3"></span>
+                    <span class="case-dot" data-index="4"></span>
+                    <span class="case-dot" data-index="5"></span>
+                    <span class="case-dot" data-index="6"></span>
+                    <span class="case-dot" data-index="7"></span>
+                    <span class="case-dot" data-index="8"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 关于我们 -->
+    <!-- ============================================================ -->
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
+                <!-- 左侧内容 -->
+                <div class="w-full lg:w-1/2 reveal">
+                    <span
+                        class="inline-block px-4 py-1.5 bg-indigo-100 text-indigo-700 rounded-full text-xs font-semibold tracking-wider">ABOUT
+                        US</span>
+                    <h2 class="text-4xl sm:text-5xl font-bold text-slate-900 mt-4 leading-tight">
+                        专业的工业视觉 <br />
+                        <span class="gradient-text">解决方案提供商</span>
+                    </h2>
+                    <p class="text-slate-500 mt-4 leading-relaxed text-lg">
+                        我们是一家致力于在技术创新和发展领域为客户提供高品质的产品和服务，以解决不同行业的挑战，并为其提供持续的支持和技术咨询。经销海康、基恩士、康耐视、霍尼韦尔视觉产品，广泛应用于汽车、新能源、半导体、军工、食品包装、
+                        家电、 五金、 汽配等行业。
+                    </p>
+                    <p class="text-slate-500 mt-3 leading-relaxed">
+                        公司成立于2021年，是一家专注于机器视觉行业标准产品及提供专业解决方案的企业，以工业4.0和 “中国智造2025”为契机， 以“智能和创新解决方案为客户提供优势
+                        和附加值”为使命，持续完善产业布局以及调整 组织架构，为客户提供全方位智能制造一体化解决方案。
+                    </p>
+                    <p class="text-slate-500 mt-3 leading-relaxed">
+                        业务范围聚焦于工业视觉定位、外观瑕疵、尺寸测量、智能读码。
+                    </p>
+                    <div class="flex flex-wrap gap-8 mt-8">
+                        <div>
+                            <div class="text-3xl font-bold text-slate-900">2021</div>
+                            <div class="text-sm text-slate-400">公司成立</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-slate-900">15</div>
+                            <div class="text-sm text-slate-400">省份覆盖</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-slate-900">900+</div>
+                            <div class="text-sm text-slate-400">服务客户</div>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-3 mt-6">
+                        <span
+                            class="px-4 py-2 bg-blue-50 text-blue-700 text-sm rounded-full border border-blue-100">视觉生态服务商</span>
+                        <span
+                            class="px-4 py-2 bg-emerald-50 text-emerald-700 text-sm rounded-full border border-emerald-100">高新技术赋能</span>
+                        <span
+                            class="px-4 py-2 bg-emerald-50 text-emerald-700 text-sm rounded-full border border-emerald-100">专业技术团队</span>
+                        <span
+                            class="px-4 py-2 bg-emerald-50 text-emerald-700 text-sm rounded-full border border-emerald-100">丰富软硬件生态</span>
+
+                    </div>
+                </div>
+
+                <!-- 右侧装饰 -->
+                <div class="w-full lg:w-1/2 reveal reveal-delay-2">
+                    <div class="relative">
+                        <div
+                            class="aspect-square bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl flex items-center justify-center">
+                            <div class="text-center">
+                                <div class="text-8xl text-blue-500/20 mb-4">
+                                    <i class="fas fa-eye"></i>
+                                </div>
+                                <div class="text-2xl font-bold text-slate-800">深圳市盛美特科技有限公司</div>
+                                <div class="text-sm text-slate-400 mt-1">ShenZhen Shenmeite Technology Co.Ltd</div>
+                            </div>
+                        </div>
+                        <!-- 浮动装饰 -->
+                        <div class="absolute -top-4 -right-4 w-20 h-20 bg-blue-500/10 rounded-full blur-2xl"></div>
+                        <div class="absolute -bottom-4 -left-4 w-20 h-20 bg-purple-500/10 rounded-full blur-2xl"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 页脚 -->
+    <!-- ============================================================ -->
+    <footer class="bg-slate-900 text-slate-400 py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-9 h-9 bg-gradient-to-br from-blue-600 to-blue-500 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-eye text-white text-sm"></i>
+                    </div>
+                    <span class="text-white font-bold text-lg">深圳市盛美特科技有限公司</span>
+                </div>
+                <div class="flex gap-6 text-sm">
+                    <a href="#" class="hover:text-white transition-colors">隐私政策</a>
+                    <a href="#" class="hover:text-white transition-colors">服务条款</a>
+                    <a href="#" class="hover:text-white transition-colors">联系我们</a>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 mt-8 pt-8 text-center text-sm">
+                <p>© 2026 深圳市盛美特科技有限公司. All rights reserved.</p>
+                <p class="text-xs text-slate-500 mt-1">本网站只作公司在线简介</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================================ -->
+    <!-- 案例详情模态框 -->
+    <!-- ============================================================ -->
+    <div id="caseModal"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm hidden transition-opacity duration-300">
+        <div class="bg-white rounded-3xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto shadow-2xl transform transition-all duration-300 scale-95 opacity-0"
+            id="modalContent">
+            <div class="sticky top-0 bg-white/80 backdrop-blur-sm z-10 flex justify-end p-4 border-b border-slate-100">
+                <button id="closeModal"
+                    class="w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 transition-colors flex items-center justify-center text-slate-500">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="modalBody" class="p-6 md:p-8">
+                <!-- 动态内容由 JavaScript 填充 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- JavaScript -->
+    <!-- ============================================================ -->
+    <script>
+        (function () {
+            'use strict';
+
+            // ============================================================
+            // 案例数据（包含多图数组）
+            // ============================================================
+            const caseData = [
+                {
+                    id: 0,
+                    title: '国内某知名汽车品牌点胶检测',
+                    category: '汽车制造',
+                    categoryColor: 'blue',
+                    icon: 'fa-car',
+                    images: [
+                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkbWpjhz5jqJ-HRqWIITlw-efPtrFtAAIaIQACIU4YVwHkmOewww3xPQQ.jpg',
+                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkbWpjhz5jqJ-HRqWIITlw-efPtrFtAAIaIQACIU4YVwHkmOewww3xPQQ.jpg',
+                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkbWpjhz5jqJ-HRqWIITlw-efPtrFtAAIaIQACIU4YVwHkmOewww3xPQQ.jpg'
+                    ],
+                    description: '我们为某国内某新兴新能源汽车制造商提供了汽车减速机壳体胶路检测，检测点胶的胶宽、断胶、位置度，以保证点胶后减速机后续工段不受影响，壳体点胶位置多，点胶范围大，且胶路轨迹曲折多变，检测难度高。',
+                    details: '胶宽检测精度要求±0.5mm，分拍多个拍照点位，检测数据卡控范围以及允许NG点位能动态调试适应多个型号产品的生产检测需求，系统集成 MES，拍照存图支持质量追溯。',
+                    stats: [
+                        { label: '漏检率', value: '0.05%' },
+                        { label: '硬件方案', value: '2D相机' },
+                        { label: '产能提效', value: '73%' },
+                        { label: '服务产线', value: '5条' }
+                    ]
+                },
+                {
+                    id: 1,
+                    title: 'PCB板自动光学检测系统',
+                    category: '电子行业',
+                    categoryColor: 'purple',
+                    icon: 'fa-microchip',
+                    images: [
+                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkbWpjhz5jqJ-HRqWIITlw-efPtrFtAAIaIQACIU4YVwHkmOewww3xPQQ.jpg',
+                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkbWpjhz5jqJ-HRqWIITlw-efPtrFtAAIaIQACIU4YVwHkmOewww3xPQQ.jpg',
+                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkbWpjhz5jqJ-HRqWIITlw-efPtrFtAAIaIQACIU4YVwHkmOewww3xPQQ.jpg'
+                    ],
+                    description: 'PCB行业早期生产设备的检测方式是通过人工目测加人工记录的方式，这种方法效率差，极容易误判漏判，导致产能严重受限。检测时需高强度光源照亮产品，人员在光源旁操作容易对眼睛造成不可逆的伤害。因此近年来引入机器视觉检测的方式，提高检测效率并且保护操作人员的安全。',
+                    details: '我司为国内某知名3C终端设计一套外设系统，流水线产品到位后自动拍照，快速检测并踢料，自动剔除NG产品，流出OK产品，对接MES系统并保存记录，方便PCB产品追溯',
+                    stats: [
+                        { label: '速度提升', value: '300%' },
+                        { label: '成本降低', value: '70%' },
+                        { label: '误报率', value: '<0.5%' }
+                    ],
+                },
+                {
+                    id: 2,
+                    title: '动态血糖仪发射器读码',
+                    category: '医疗行业',
+                    categoryColor: 'emerald',
+                    icon: 'fa-capsules',
+                    images: [
+                        'https://picsum.photos/seed/med1/600/400',
+                        'https://picsum.photos/seed/med2/600/400',
+                        'https://picsum.photos/seed/med3/600/400'
+                    ],
+                    description: '近年来，随着人们生活水平日益提高，糖尿病也越来越成为社会关注的热点问题，患糖尿病人口逐年攀升。面对这一急切问题，政府对相关检测设备制定了相应要求和规范，为血糖检测行业的发展提供了保障。',
+                    details: '血糖仪电池组件二维码读取，客户痛点二维码打在透明壳上底部强反光，导致读码不稳定。改造以读码器+外部打光方式实现，可稳定成像，稳定读取',
+                    stats: [
+                        { label: '解码成功率', value: '99.999%' },
+                        { label: '运行CT', value: '250ms' }
+                    ]
+                },
+                {
+                    id: 3,
+                    title: '食品包装飞拍读码',
+                    category: '食品行业',
+                    categoryColor: 'orange',
+                    icon: 'fa-utensils',
+                    images: [
+                        'https://picsum.photos/seed/food1/600/400',
+                        'https://picsum.photos/seed/food2/600/400',
+                        'https://picsum.photos/seed/food3/600/400'
+                    ],
+                    description: '为了应对频发的食品质量安全事件,迫切需要建立食品质量追溯体系和质量电子追溯系统,一方面为消费者和企业提供食品信息追溯的查询服务,另一方面保证生产企业从食品原料的源头、生产加工、仓储、流通销售等环节对制品质量进行有效管控。',
+                    details: '客户装箱打包后读码，读码器飞拍（速度约100mm/s）后发送上位机上传mes过站，确保每件产品能通过条码溯源，有效避免因生产或物流环节问题导致的食品安全事故。',
+                    stats: [
+                        { label: '检测速度', value: '100mm/s' },
+                        { label: '检测项', value: '终箱读码' },
+                    ]
+                },
+                {
+                    id: 4,
+                    title: '汽车电驱中框胶路检测',
+                    category: '汽车行业',
+                    categoryColor: 'cyan',
+                    icon: 'fa-boxes',
+                    images: [
+                        'https://picsum.photos/seed/log1/600/400',
+                        'https://picsum.photos/seed/log2/600/400',
+                        'https://picsum.photos/seed/log3/600/400'
+                    ],
+                    description: '随着汽车工业的快速演进，汽车功能件与零部件日益趋向智能化、精细化与高可靠性发展；胶路在工业应用中的作用：用于避免液体或固体颗粒从相邻熔合面泄漏，以及灰尘和水等外部残留物侵入机械设备零件。',
+                    details: '产品点胶后胶高、胶宽、断胶、溢胶检测，需要兼容多款产品，多种胶路（如1-3层叠胶路），快速换型，使用3D相机扫描出胶体立体信息后做检测',
+                    stats: [
+                        { label: '扫描速度', value: '150mm/s' },
+                        { label: '漏检率', value: '0.005%' },
+                        { label: '高度测量重复性', value: '0.008mm' }
+                    ]
+                },
+                {
+                    id: 5,
+                    title: '铜箔卷料检测',
+                    category: '锂电行业',
+                    categoryColor: 'rose',
+                    icon: 'fa-mobile-alt',
+                    images: [
+                        'https://picsum.photos/seed/3c1/600/400',
+                        'https://picsum.photos/seed/3c2/600/400',
+                        'https://picsum.photos/seed/3c3/600/400'
+                    ],
+                    description: '生箔机用于生产电解铜箔，铜箔作为一种重要的功能性基础材料，在印制电路板、覆铜箔层压板及锂离子电池等领域被广泛应用。在生产工艺中，粒子类异物、电解液飞溅以及其他设备问题易对箔材表面造成缺陷。视觉方案主要进行幅宽、料长等多个尺寸测量',
+                    details: '使用2.5D技术路线成像，使用深度学习+传统算法的方式进行表面缺陷检测，输出缺陷信息，有助于指导后续分切工艺，节约成本。',
+                    stats: [
+                        { label: '检测速度', value: '0.25m/s' },
+                        { label: '分类准确率', value: '≥95%（缺陷标准明确条件下）' },
+                        { label: '误判率', value: '≤0.5%' }
+                    ]
+                },
+                {
+                    id: 6,
+                    title: '平板CG盖板抓取',
+                    category: '消费电子',
+                    categoryColor: 'orange',
+                    icon: 'fa-mobile-alt',
+                    images: [
+                        'https://picsum.photos/seed/3c1/600/400',
+                        'https://picsum.photos/seed/3c2/600/400',
+                        'https://picsum.photos/seed/3c3/600/400'
+                    ],
+                    description: '该项目在自动化生产的设备上。通过，利用机械手将CG盖板上料，相机拍照后，引导机械手进行抓取后边缘涂黑。提高盖板的上料精度，为后续的自动喷涂动作提供了精度保障，提高了设备喷涂位置的精度',
+                    details: '2D 引导机械臂定位抓取，由于对抓取精度有要求，硬件视野较小，需要通过特殊的方式计算像素点位',
+                    stats: [
+                        { label: '定位精度', value: '±0.1mm' },
+                        { label: '视觉CT', value: '300ms' },
+                        { label: '服务数量', value: '15台' }
+                    ]
+                },
+                {
+                    id: 7,
+                    title: '充电宝盖板异物检测',
+                    category: '消费电子',
+                    categoryColor: 'purple',
+                    icon: 'fa-mobile-alt',
+                    images: [
+                        'https://picsum.photos/seed/3c1/600/400',
+                        'https://picsum.photos/seed/3c2/600/400',
+                        'https://picsum.photos/seed/3c3/600/400'
+                    ],
+                    description: '该项目为充电宝组装前的检测，通过智能相机内置AI算法识别盖板内有无掉落螺丝，为紧凑的设备无法架设常规面阵相机的情况提供了一种新的解决思路。防止因掉落螺丝等异物导致充电宝产品异常，保证良好的检测稳定性是该行业检测的聚焦之点。',
+                    details: '设备无冗余空间可架设面阵相机加镜头光源的搭配，使用嵌入式集成度高的智能相机解决客户痛点',
+                    stats: [
+                        { label: '算法实现', value: '异常检测' },
+                        { label: '硬件系统', value: '智能相机' }
+                    ]
+                },
+                                {
+                    id: 8,
+                    title: '方壳电池焊接外观检3D',
+                    category: '锂电行业',
+                    categoryColor: 'cyan',
+                    icon: 'fa-mobile-alt',
+                    images: [
+                        'https://picsum.photos/seed/3c1/600/400',
+                        'https://picsum.photos/seed/3c2/600/400',
+                        'https://picsum.photos/seed/3c3/600/400'
+                    ],
+                    description: '随着新能源车需求的持续增长，锂电池在新能源汽车行业的应用前景广阔。目前锂电池包括硬壳和软包电池，硬壳则可分为圆柱电池和方形电池。其中方形电池凭借其充放电倍率、循环寿命、安全性等方面的优势，成为一种主流的电池封装应用。',
+                    details: '电芯入壳后进行预点焊，检测焊缝宽度和台阶高度，焊接缝隙狭窄，检测精度要求高；通过深度学习图像分割算法，可兼容不同背景的样本，对于相似缺陷，在标注上赋予忽略以加大采样，最终能快速精准的获得缺陷的位置及其类别标签',
+                    stats: [
+                        { label: '算法实现', value: '图像分割' },
+                        { label: '硬件系统', value: '3D线激光' }
+                    ]
+                }
+
+            ];
+
+            // ============================================================
+            // 1. 导航栏滚动变色
+            // ============================================================
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', function () {
+                if (window.pageYOffset > 60) {
+                    navbar.classList.add('navbar-scrolled');
+                } else {
+                    navbar.classList.remove('navbar-scrolled');
+                }
+            });
+
+            // ============================================================
+            // 2. 移动端菜单切换
+            // ============================================================
+            const menuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (menuBtn && mobileMenu) {
+                menuBtn.addEventListener('click', function () {
+                    mobileMenu.classList.toggle('hidden');
+                    const icon = menuBtn.querySelector('i');
+                    if (icon) {
+                        icon.classList.toggle('fa-bars');
+                        icon.classList.toggle('fa-times');
+                    }
+                });
+            }
+
+            // ============================================================
+            // 3. 滚动触发动画 (Intersection Observer)
+            // ============================================================
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+            revealElements.forEach(function (el) { revealObserver.observe(el); });
+
+            // ============================================================
+            // 4. 数字滚动动画
+            // ============================================================
+            const statNumbers = document.querySelectorAll('.stat-number');
+            const numberObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        const el = entry.target;
+                        const target = parseInt(el.getAttribute('data-target'), 10);
+                        if (isNaN(target)) return;
+                        let current = 0;
+                        const increment = Math.ceil(target / 50);
+                        const timer = setInterval(function () {
+                            current += increment;
+                            if (current >= target) {
+                                current = target;
+                                clearInterval(timer);
+                            }
+                            el.textContent = current;
+                        }, 30);
+                        numberObserver.unobserve(el);
+                    }
+                });
+            }, { threshold: 0.5 });
+            statNumbers.forEach(function (el) { numberObserver.observe(el); });
+
+            // ============================================================
+            // 5. 产品分类筛选
+            // ============================================================
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const productCards = document.querySelectorAll('.product-card');
+            filterBtns.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    filterBtns.forEach(function (b) { b.classList.remove('active'); });
+                    btn.classList.add('active');
+                    const filter = btn.getAttribute('data-filter');
+                    productCards.forEach(function (card) {
+                        const category = card.getAttribute('data-category');
+                        if (filter === 'all' || category === filter) {
+                            card.style.display = 'block';
+                            card.style.opacity = '0';
+                            card.style.transform = 'scale(0.95)';
+                            setTimeout(function () {
+                                card.style.transition = 'all 0.4s ease';
+                                card.style.opacity = '1';
+                                card.style.transform = 'scale(1)';
+                            }, 50);
+                        } else {
+                            card.style.transition = 'all 0.3s ease';
+                            card.style.opacity = '0';
+                            card.style.transform = 'scale(0.9)';
+                            setTimeout(function () {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+
+            // ============================================================
+            // 6. 主案例轮播
+            // ============================================================
+            const slider = document.getElementById('caseSlider');
+            const prevBtn = document.getElementById('casePrev');
+            const nextBtn = document.getElementById('caseNext');
+            const dots = document.querySelectorAll('.case-dot');
+            let currentIndex = 0;
+            const totalSlides = dots.length;
+            let autoPlayTimer = null;
+
+            function goToSlide(index) {
+                if (index < 0) index = totalSlides - 1;
+                if (index >= totalSlides) index = 0;
+                currentIndex = index;
+                slider.style.transform = 'translateX(-' + (currentIndex * 100) + '%)';
+                dots.forEach(function (dot, i) {
+                    dot.classList.toggle('active', i === currentIndex);
+                });
+            }
+            function nextSlide() { goToSlide(currentIndex + 1); }
+            function prevSlide() { goToSlide(currentIndex - 1); }
+
+            if (prevBtn) prevBtn.addEventListener('click', function () { prevSlide(); resetAutoPlay(); });
+            if (nextBtn) nextBtn.addEventListener('click', function () { nextSlide(); resetAutoPlay(); });
+            dots.forEach(function (dot) {
+                dot.addEventListener('click', function () {
+                    const index = parseInt(dot.getAttribute('data-index'), 10);
+                    if (!isNaN(index)) { goToSlide(index); resetAutoPlay(); }
+                });
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'ArrowLeft') { prevSlide(); resetAutoPlay(); }
+                if (e.key === 'ArrowRight') { nextSlide(); resetAutoPlay(); }
+            });
+
+            function startAutoPlay() {
+                if (autoPlayTimer) clearInterval(autoPlayTimer);
+                autoPlayTimer = setInterval(nextSlide, 5000);
+            }
+            function resetAutoPlay() {
+                if (autoPlayTimer) { clearInterval(autoPlayTimer); autoPlayTimer = null; }
+                startAutoPlay();
+            }
+            startAutoPlay();
+
+            const sliderContainer = document.querySelector('.relative.overflow-hidden.rounded-3xl');
+            if (sliderContainer) {
+                sliderContainer.addEventListener('mouseenter', function () {
+                    if (autoPlayTimer) { clearInterval(autoPlayTimer); autoPlayTimer = null; }
+                });
+                sliderContainer.addEventListener('mouseleave', function () { startAutoPlay(); });
+            }
+
+            // ============================================================
+            // 7. 模态框逻辑（含多图轮播）
+            // ============================================================
+            const modal = document.getElementById('caseModal');
+            const modalBody = document.getElementById('modalBody');
+            const closeBtn = document.getElementById('closeModal');
+            const modalContent = document.getElementById('modalContent');
+            let modalTimers = {};
+
+            // 生成图片轮播 HTML
+            function renderModalSlider(data) {
+                const hasImages = data.images && data.images.length > 0;
+                if (!hasImages) {
+                    return `
+                <div class="flex items-center justify-center h-48 text-6xl text-${data.categoryColor}-500/30">
+                    <i class="fas ${data.icon}"></i>
+                </div>
+            `;
+                }
+                // 有多张图才生成轮播结构
+                let html = `
+            <div class="relative w-full overflow-hidden rounded-xl">
+                <div class="flex transition-transform duration-500 ease-out" id="modalSlider-${data.id}">
+        `;
+                data.images.forEach(img => {
+                    html += `
+                <div class="min-w-full">
+                    <img src="${img}" alt="${data.title}" class="w-full h-48 object-cover" />
+                </div>
+            `;
+                });
+                html += `</div>`;
+                if (data.images.length > 1) {
+                    html += `
+                <button class="modal-slider-prev absolute left-1 top-1/2 -translate-y-1/2 w-7 h-7 bg-white/80 rounded-full shadow flex items-center justify-center text-slate-600 hover:bg-white transition" data-id="${data.id}">
+                    <i class="fas fa-chevron-left text-xs"></i>
+                </button>
+                <button class="modal-slider-next absolute right-1 top-1/2 -translate-y-1/2 w-7 h-7 bg-white/80 rounded-full shadow flex items-center justify-center text-slate-600 hover:bg-white transition" data-id="${data.id}">
+                    <i class="fas fa-chevron-right text-xs"></i>
+                </button>
+                <div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5" id="modalDots-${data.id}">
+            `;
+                    data.images.forEach((_, i) => {
+                        html += `<span class="modal-dot w-1.5 h-1.5 rounded-full bg-white/60 transition-all ${i === 0 ? 'w-4 bg-white' : ''}" data-index="${i}"></span>`;
+                    });
+                    html += `</div>`;
+                }
+                html += `</div>`;
+                return html;
+            }
+
+            function initModalSlider(caseId) {
+                const slider = document.getElementById(`modalSlider-${caseId}`);
+                if (!slider) return;
+                const container = slider.parentElement;
+                const prevBtn = container.querySelector('.modal-slider-prev');
+                const nextBtn = container.querySelector('.modal-slider-next');
+                const dots = container.querySelectorAll('.modal-dot');
+                if (!dots.length) return;
+
+                let current = 0;
+                const total = dots.length;
+                let timer = null;
+
+                function goTo(index) {
+                    if (index < 0) index = total - 1;
+                    if (index >= total) index = 0;
+                    current = index;
+                    slider.style.transform = `translateX(-${current * 100}%)`;
+                    dots.forEach((dot, i) => {
+                        dot.classList.toggle('w-4', i === current);
+                        dot.classList.toggle('bg-white', i === current);
+                        dot.classList.toggle('bg-white/60', i !== current);
+                    });
+                }
+                function next() { goTo(current + 1); }
+                function prev() { goTo(current - 1); }
+
+                if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); prev(); resetTimer(); });
+                if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); next(); resetTimer(); });
+                dots.forEach((dot, i) => {
+                    dot.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        goTo(i);
+                        resetTimer();
+                    });
+                });
+
+                function startTimer() {
+                    if (timer) clearInterval(timer);
+                    timer = setInterval(next, 4000);
+                }
+                function resetTimer() {
+                    if (timer) clearInterval(timer);
+                    startTimer();
+                }
+                container.addEventListener('mouseenter', () => { if (timer) clearInterval(timer); });
+                container.addEventListener('mouseleave', startTimer);
+                startTimer();
+
+                // 存储定时器以便关闭时清理
+                modalTimers[caseId] = timer;
+            }
+
+            function openCaseModal(index) {
+                const data = caseData[index];
+                if (!data) return;
+
+                // 构建左侧图片区域
+                const sliderHtml = renderModalSlider(data);
+                // 统计信息
+                const statsHtml = data.stats.map(stat => `
+            <div>
+                <div class="text-2xl font-bold text-${data.categoryColor}-600">${stat.value}</div>
+                <div class="text-xs text-slate-400">${stat.label}</div>
+            </div>
+        `).join('');
+
+                modalBody.innerHTML = `
+            <div class="flex flex-col md:flex-row gap-6">
+                <div class="md:w-1/3 flex flex-col items-center justify-center bg-slate-50 rounded-2xl p-4 overflow-hidden">
+                    ${sliderHtml}
+                    <span class="mt-2 inline-block px-3 py-1 bg-${data.categoryColor}-100 text-${data.categoryColor}-700 text-xs font-semibold rounded-full">${data.category}</span>
+                </div>
+                <div class="md:w-2/3">
+                    <h3 class="text-2xl font-bold text-slate-900">${data.title}</h3>
+                    <p class="text-slate-600 mt-3 leading-relaxed">${data.description}</p>
+                    <p class="text-slate-500 mt-2 leading-relaxed">${data.details}</p>
+                    <div class="flex flex-wrap gap-6 mt-4 pt-4 border-t border-slate-100">
+                        ${statsHtml}
+                    </div>
+                    <div class="mt-4 text-sm text-slate-400">* 更多详情请联系我们获取完整方案</div>
+                </div>
+            </div>
+        `;
+
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modalContent.classList.remove('scale-95', 'opacity-0');
+                    modalContent.classList.add('scale-100', 'opacity-100');
+                    // 初始化图片轮播（如果有图片且大于1张）
+                    if (data.images && data.images.length > 1) {
+                        setTimeout(() => initModalSlider(data.id), 100);
+                    }
+                }, 20);
+            }
+
+            function closeCaseModal() {
+                // 清理所有模态框定时器
+                Object.values(modalTimers).forEach(t => clearInterval(t));
+                modalTimers = {};
+                modalContent.classList.remove('scale-100', 'opacity-100');
+                modalContent.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            }
+
+            // 绑定所有"了解更多"按钮
+            document.querySelectorAll('.open-case-btn').forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    const index = parseInt(this.getAttribute('data-case-index'), 10);
+                    if (!isNaN(index)) openCaseModal(index);
+                });
+            });
+
+            closeBtn.addEventListener('click', closeCaseModal);
+            modal.addEventListener('click', function (e) {
+                if (e.target === modal) closeCaseModal();
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeCaseModal();
+            });
+
+            // ============================================================
+            // 8. 平滑锚点跳转
+            // ============================================================
+            document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    const targetEl = document.querySelector(targetId);
+                    if (targetEl) {
+                        e.preventDefault();
+                        const offsetTop = targetEl.getBoundingClientRect().top + window.pageYOffset - 80;
+                        window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+                        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                            mobileMenu.classList.add('hidden');
+                            const icon = menuBtn.querySelector('i');
+                            if (icon) {
+                                icon.classList.add('fa-bars');
+                                icon.classList.remove('fa-times');
+                            }
+                        }
+                    }
+                });
+            });
+
+        })();
+    </script>
+
+</body>
+
+</html>
