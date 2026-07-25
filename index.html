@@ -89,7 +89,7 @@
 
         /* ===== 文字渐变 ===== */
         .gradient-text {
-            background: linear-gradient(135deg, #60a5fa, #2563eb, #7c3aed);
+            background: linear-gradient(135deg, #6ea6ea, #4479ea, #ac81f6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -229,7 +229,7 @@
             </a>
 
             <!-- 桌面导航 -->
-            <div class="hidden md:flex items-center gap-8">
+            <div class="hidden md:flex items-center gap-20">
                 <a href="#hero"
                     class="nav-link text-white/80 hover:text-white text-sm font-medium transition-colors relative group">
                     首页
@@ -264,10 +264,6 @@
 
             <!-- 右侧按钮 -->
             <div class="flex items-center gap-3">
-                <a href="#products"
-                    class="px-5 py-2 text-sm bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-full hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-300">
-                    产品介绍
-                </a>
                 <!-- 移动端菜单按钮 -->
                 <button id="mobileMenuBtn"
                     class="md:hidden text-blue-400 text-xl hover:text-blue-400 transition-colors">
@@ -297,17 +293,34 @@
     <!-- ============================================================ -->
     <section id="hero" class="hero-bg hero-grid min-h-screen flex items-center relative overflow-hidden pt-20">
         <!-- 装饰光晕 -->
-
-        <!-- 新代码：背景大图（建议放在 images/ 文件夹） -->
+        <!-- Hero 区域（移动端适配版） -->
         <div class="absolute inset-0">
-            <img src="https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkmWpkKz6m9cjoVsITURA70x8EUI4eAAJdHwAC818hV9ts_Xk_L0zlPQQ.jpg" alt="工业视觉背景" class="w-full h-full object-cover" />
-            <!-- 可选：添加深色半透明遮罩，让文字更清晰 -->
+            <!-- 使用 picture 标签实现响应式图片 -->
+            <picture>
+                <!-- 手机端（< 640px）加载小图 -->
+                <source media="(max-width: 640px)"
+                    srcset="https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkm2pkL5YbZd3ayE0gmaYmuNNUTvCRAAJgHwAC818hV20KRjPcqilRPQQ.jpg" />
+                <!-- 平板端（< 1024px）加载中图 -->
+                <source media="(max-width: 1024px)"
+                    srcset="https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkm2pkL5YbZd3ayE0gmaYmuNNUTvCRAAJgHwAC818hV20KRjPcqilRPQQ.jpg" />
+                <!-- 桌面端加载大图 -->
+                <img src="https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkmWpkKz6m9cjoVsITURA70x8EUI4eAAJdHwAC818hV9ts_Xk_L0zlPQQ.jpg"
+                    alt="工业视觉背景" class="w-full h-full object-cover object-center" fetchpriority="high" />
+            </picture>
+            <!-- 深色遮罩（提高文字对比度） -->
             <div class="absolute inset-0 bg-black/50"></div>
-            <!-- 可选：保留网格装饰（放在最上层） -->
-            <div class="absolute inset-0 opacity-10"
+            <!-- 可选：网格装饰 -->
+            <div class="absolute inset-0 opacity-5"
                 style="background-image: radial-gradient(circle at 25px 25px, #ffffff 1.5px, transparent 1px); background-size: 50px 50px;">
             </div>
         </div>
+
+        <!-- 同时调整 Hero 内容区的高度（把原来的 min-h-screen 改掉） -->
+        <section id="hero"
+            class="hero-bg hero-grid min-h-[60vh] md:min-h-screen flex items-center relative overflow-hidden pt-20">
+            <!-- 内容保持不变，但高度已经由 min-h-[60vh] 控制，手机上不会占满全屏 -->
+        </section>
+
 
         <div class="relative z-10 w-full max-w-7xl mx-auto px-6 py-12">
             <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12">
@@ -330,7 +343,7 @@
                         <span class="gradient-text">智能制造</span>
                     </h1>
 
-                    <p class="text-lg sm:text-xl text-slate-500 max-w-lg leading-relaxed">
+                    <p class="text-lg sm:text-xl text-slate-100 max-w-lg leading-relaxed">
                         高精度视觉传感器与工业相机解决方案提供商
                         <br class="hidden sm:block" />
                         赋能智能制造，驱动产业升级
@@ -433,8 +446,7 @@
                         <i class="fas fa-lightbulb"></i>
                     </div>
                     <h3 class="text-xl font-bold text-slate-900 mt-5">光学打光评估</h3>
-                    <p class="text-slate-500 mt-2 leading-relaxed">提供专业的光学打光评估，为视觉慧眼亮一盏明灯</p>
-
+                    <p class="text-slate-500 mt-2 leading-relaxed">专业光学实验室，提供专业的光学打光评估，为视觉慧眼亮一盏明灯</p>
                 </div>
 
                 <!-- 业务 3 -->
@@ -457,7 +469,7 @@
                         <i class="fas fa-chalkboard-teacher"></i>
                     </div>
                     <h3 class="text-xl font-bold text-slate-900 mt-5">技术培训与支持</h3>
-                    <p class="text-slate-500 mt-2 leading-relaxed">提供专业的技术培训和技术支持服务</p>
+                    <p class="text-slate-500 mt-2 leading-relaxed">提供专业的视觉技术培训和线上线下技术支持服务</p>
 
                 </div>
 
