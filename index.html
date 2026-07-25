@@ -225,37 +225,37 @@
                     class="w-9 h-9 bg-gradient-to-br from-blue-600 to-blue-500 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/25 group-hover:shadow-blue-500/40 transition-shadow">
                     <i class="fas fa-eye text-white text-sm"></i>
                 </div>
-                <span class="logo-text text-black font-bold text-lg tracking-tight transition-colors">深圳市盛美特科技</span>
+                <span class="logo-text text-white font-bold text-lg tracking-tight transition-colors">SUNMEAT 盛美特</span>
             </a>
 
             <!-- 桌面导航 -->
             <div class="hidden md:flex items-center gap-8">
                 <a href="#hero"
-                    class="nav-link text-black/80 hover:text-white text-sm font-medium transition-colors relative group">
+                    class="nav-link text-white/80 hover:text-white text-sm font-medium transition-colors relative group">
                     首页
                     <span
                         class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
                 </a>
                 <a href="#business"
-                    class="nav-link text-black/80 hover:text-white text-sm font-medium transition-colors relative group">
+                    class="nav-link text-white/80 hover:text-white text-sm font-medium transition-colors relative group">
                     业务范围
                     <span
                         class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
                 </a>
                 <a href="#products"
-                    class="nav-link text-black/80 hover:text-white text-sm font-medium transition-colors relative group">
+                    class="nav-link text-white/80 hover:text-white text-sm font-medium transition-colors relative group">
                     产品中心
                     <span
                         class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
                 </a>
                 <a href="#cases"
-                    class="nav-link text-black/80 hover:text-white text-sm font-medium transition-colors relative group">
+                    class="nav-link text-white/80 hover:text-white text-sm font-medium transition-colors relative group">
                     行业案例
                     <span
                         class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
                 </a>
                 <a href="#about"
-                    class="nav-link text-black/80 hover:text-white text-sm font-medium transition-colors relative group">
+                    class="nav-link text-white/80 hover:text-white text-sm font-medium transition-colors relative group">
                     关于我们
                     <span
                         class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
@@ -264,16 +264,13 @@
 
             <!-- 右侧按钮 -->
             <div class="flex items-center gap-3">
-                <a href="#contact"
-                    class="hidden sm:inline-block px-5 py-2 text-sm text-white/80 border border-white/20 rounded-full hover:bg-white/10 hover:text-white transition-all duration-300">
-                    联系我们
-                </a>
                 <a href="#products"
                     class="px-5 py-2 text-sm bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-full hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-300">
                     产品介绍
                 </a>
                 <!-- 移动端菜单按钮 -->
-                <button id="mobileMenuBtn" class="md:hidden text-white text-xl hover:text-blue-400 transition-colors">
+                <button id="mobileMenuBtn"
+                    class="md:hidden text-blue-400 text-xl hover:text-blue-400 transition-colors">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
@@ -281,17 +278,17 @@
 
         <!-- 移动端下拉菜单 -->
         <div id="mobileMenu"
-            class="md:hidden hidden mt-4 bg-white/10 backdrop-blur-xl rounded-2xl p-4 border border-white/10">
+            class="md:hidden hidden mt-4 bg-white/10 backdrop-blur-3xl rounded-2xl p-4 border border-white/10">
             <a href="#hero"
-                class="block py-2.5 text-white/80 hover:text-white text-sm font-medium transition-colors border-b border-white/5">首页</a>
+                class="block py-2.5 text-black/80 hover:text-black text-sm font-medium transition-colors border-b border-white/5">首页</a>
             <a href="#business"
-                class="block py-2.5 text-white/80 hover:text-white text-sm font-medium transition-colors border-b border-white/5">业务范围</a>
+                class="block py-2.5 text-black/80 hover:text-black text-sm font-medium transition-colors border-b border-white/5">业务范围</a>
             <a href="#products"
-                class="block py-2.5 text-white/80 hover:text-white text-sm font-medium transition-colors border-b border-white/5">产品中心</a>
+                class="block py-2.5 text-black/80 hover:text-black text-sm font-medium transition-colors border-b border-white/5">产品中心</a>
             <a href="#cases"
-                class="block py-2.5 text-white/80 hover:text-white text-sm font-medium transition-colors border-b border-white/5">行业案例</a>
+                class="block py-2.5 text-black/text-black80 hover:text-black text-sm font-medium transition-colors border-b border-white/5">行业案例</a>
             <a href="#about"
-                class="block py-2.5 text-white/80 hover:text-white text-sm font-medium transition-colors">关于我们</a>
+                class="block py-2.5 text-black/80 hover:text-black text-sm font-medium transition-colors">关于我们</a>
         </div>
     </nav>
 
@@ -300,8 +297,17 @@
     <!-- ============================================================ -->
     <section id="hero" class="hero-bg hero-grid min-h-screen flex items-center relative overflow-hidden pt-20">
         <!-- 装饰光晕 -->
-        <div class="absolute top-1/4 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-1/4 left-1/4 w-80 h-80 bg-purple-600/8 rounded-full blur-3xl"></div>
+
+        <!-- 新代码：背景大图（建议放在 images/ 文件夹） -->
+        <div class="absolute inset-0">
+            <img src="https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkmWpkKz6m9cjoVsITURA70x8EUI4eAAJdHwAC818hV9ts_Xk_L0zlPQQ.jpg" alt="工业视觉背景" class="w-full h-full object-cover" />
+            <!-- 可选：添加深色半透明遮罩，让文字更清晰 -->
+            <div class="absolute inset-0 bg-black/50"></div>
+            <!-- 可选：保留网格装饰（放在最上层） -->
+            <div class="absolute inset-0 opacity-10"
+                style="background-image: radial-gradient(circle at 25px 25px, #ffffff 1.5px, transparent 1px); background-size: 50px 50px;">
+            </div>
+        </div>
 
         <div class="relative z-10 w-full max-w-7xl mx-auto px-6 py-12">
             <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12">
@@ -324,7 +330,7 @@
                         <span class="gradient-text">智能制造</span>
                     </h1>
 
-                    <p class="text-lg sm:text-xl text-slate-300 max-w-lg leading-relaxed">
+                    <p class="text-lg sm:text-xl text-slate-500 max-w-lg leading-relaxed">
                         高精度视觉传感器与工业相机解决方案提供商
                         <br class="hidden sm:block" />
                         赋能智能制造，驱动产业升级
@@ -904,7 +910,7 @@
                             <div class="w-full md:w-2/3">
                                 <span
                                     class="inline-block px-3 py-1 bg-orange-100 text-orange-700 text-xs font-semibold rounded-full">食品行业</span>
-                                <h3 class="text-2xl font-bold text-slate-900 mt-3">食品包装飞拍</h3>
+                                <h3 class="text-2xl font-bold text-slate-900 mt-3">食品包装飞拍读码</h3>
                                 <p class="text-slate-500 mt-2 leading-relaxed">终端生产装箱打包读码，保障食品可追溯，提高食品安全</p>
                                 <div class="flex gap-6 mt-4">
                                     <div><span class="text-2xl font-bold text-orange-600">200mm/s</span><span
@@ -1228,8 +1234,8 @@
                     categoryColor: 'blue',
                     icon: 'fa-car',
                     images: [
-                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkbWpjhz5jqJ-HRqWIITlw-efPtrFtAAIaIQACIU4YVwHkmOewww3xPQQ.jpg',
-                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkbWpjhz5jqJ-HRqWIITlw-efPtrFtAAIaIQACIU4YVwHkmOewww3xPQQ.jpg',
+                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkg2pkJecLJZE02-51mg7JugqsgsjoAAJAHwAC818hVxE2WBfPjbc_PQQ.jpg',
+                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkhGpkJeiAhV-3_nIbKAc_gyKcAAFHdAACQR8AAvNfIVfpxtptaunggT0E.jpg',
                         'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkbWpjhz5jqJ-HRqWIITlw-efPtrFtAAIaIQACIU4YVwHkmOewww3xPQQ.jpg'
                     ],
                     description: '我们为某国内某新兴新能源汽车制造商提供了汽车减速机壳体胶路检测，检测点胶的胶宽、断胶、位置度，以保证点胶后减速机后续工段不受影响，壳体点胶位置多，点胶范围大，且胶路轨迹曲折多变，检测难度高。',
@@ -1248,9 +1254,8 @@
                     categoryColor: 'purple',
                     icon: 'fa-microchip',
                     images: [
-                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkbWpjhz5jqJ-HRqWIITlw-efPtrFtAAIaIQACIU4YVwHkmOewww3xPQQ.jpg',
-                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkbWpjhz5jqJ-HRqWIITlw-efPtrFtAAIaIQACIU4YVwHkmOewww3xPQQ.jpg',
-                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkbWpjhz5jqJ-HRqWIITlw-efPtrFtAAIaIQACIU4YVwHkmOewww3xPQQ.jpg'
+                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkhWpkJklZQyqHuAMl1a6VCWGLuFnIAAJDHwAC818hVyLuu1uW6XIcPQQ.jpg',
+                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkhmpkJkr1gdz5G9yFQ68RQwXC6L5jAAJEHwAC818hV0gQwF_LEVZ5PQQ.jpg'
                     ],
                     description: 'PCB行业早期生产设备的检测方式是通过人工目测加人工记录的方式，这种方法效率差，极容易误判漏判，导致产能严重受限。检测时需高强度光源照亮产品，人员在光源旁操作容易对眼睛造成不可逆的伤害。因此近年来引入机器视觉检测的方式，提高检测效率并且保护操作人员的安全。',
                     details: '我司为国内某知名3C终端设计一套外设系统，流水线产品到位后自动拍照，快速检测并踢料，自动剔除NG产品，流出OK产品，对接MES系统并保存记录，方便PCB产品追溯',
@@ -1267,9 +1272,8 @@
                     categoryColor: 'emerald',
                     icon: 'fa-capsules',
                     images: [
-                        'https://picsum.photos/seed/med1/600/400',
-                        'https://picsum.photos/seed/med2/600/400',
-                        'https://picsum.photos/seed/med3/600/400'
+                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkh2pkJnLuHON7O2MTrase91hijIbBAAJFHwAC818hVyEzX5BN1b89PQQ.jpg',
+                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkiGpkJnLPH4r_6vZS6VL1HVofLK3nAAJGHwAC818hV2wh_9JQSxO4PQQ.jpg'
                     ],
                     description: '近年来，随着人们生活水平日益提高，糖尿病也越来越成为社会关注的热点问题，患糖尿病人口逐年攀升。面对这一急切问题，政府对相关检测设备制定了相应要求和规范，为血糖检测行业的发展提供了保障。',
                     details: '血糖仪电池组件二维码读取，客户痛点二维码打在透明壳上底部强反光，导致读码不稳定。改造以读码器+外部打光方式实现，可稳定成像，稳定读取',
@@ -1285,9 +1289,8 @@
                     categoryColor: 'orange',
                     icon: 'fa-utensils',
                     images: [
-                        'https://picsum.photos/seed/food1/600/400',
-                        'https://picsum.photos/seed/food2/600/400',
-                        'https://picsum.photos/seed/food3/600/400'
+                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkiWpkJqQyLPnhC4eexhifa9_AvBKBAAJIHwAC818hV_o5UTYeJwdhPQQ.jpg',
+                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkimpkJqSYt0AtFMB7BzMjrM4_IiYiAAJJHwAC818hV4Q7NBXAKzwvPQQ.jpg'
                     ],
                     description: '为了应对频发的食品质量安全事件,迫切需要建立食品质量追溯体系和质量电子追溯系统,一方面为消费者和企业提供食品信息追溯的查询服务,另一方面保证生产企业从食品原料的源头、生产加工、仓储、流通销售等环节对制品质量进行有效管控。',
                     details: '客户装箱打包后读码，读码器飞拍（速度约100mm/s）后发送上位机上传mes过站，确保每件产品能通过条码溯源，有效避免因生产或物流环节问题导致的食品安全事故。',
@@ -1303,9 +1306,8 @@
                     categoryColor: 'cyan',
                     icon: 'fa-boxes',
                     images: [
-                        'https://picsum.photos/seed/log1/600/400',
-                        'https://picsum.photos/seed/log2/600/400',
-                        'https://picsum.photos/seed/log3/600/400'
+                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJki2pkJuYrpr-5p23aiC73kKKtqlBpAAJKHwAC818hV7CpWU57JTWkPQQ.jpg',
+                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkjGpkJubcGXL1rb2_BFj5O-7Mc9HkAAJLHwAC818hV0Veg2v20AlnPQQ.jpg'
                     ],
                     description: '随着汽车工业的快速演进，汽车功能件与零部件日益趋向智能化、精细化与高可靠性发展；胶路在工业应用中的作用：用于避免液体或固体颗粒从相邻熔合面泄漏，以及灰尘和水等外部残留物侵入机械设备零件。',
                     details: '产品点胶后胶高、胶宽、断胶、溢胶检测，需要兼容多款产品，多种胶路（如1-3层叠胶路），快速换型，使用3D相机扫描出胶体立体信息后做检测',
@@ -1322,9 +1324,9 @@
                     categoryColor: 'rose',
                     icon: 'fa-mobile-alt',
                     images: [
-                        'https://picsum.photos/seed/3c1/600/400',
-                        'https://picsum.photos/seed/3c2/600/400',
-                        'https://picsum.photos/seed/3c3/600/400'
+                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkjWpkJw6ZzfW1Kg2HfWcIp51zhD2rAAJMHwAC818hV4DHOqkDusqFPQQ.jpg',
+                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkjmpkJw-7QbU9s61sMDGV6cXVRrGWAAJNHwAC818hV3GeHVrUEqCOPQQ.jpg',
+                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkkGpkJ0n4zPp_qbXxRDv0dOwH6w-cAAJPHwAC818hVxxeXzPhmvI7PQQ.jpg'
                     ],
                     description: '生箔机用于生产电解铜箔，铜箔作为一种重要的功能性基础材料，在印制电路板、覆铜箔层压板及锂离子电池等领域被广泛应用。在生产工艺中，粒子类异物、电解液飞溅以及其他设备问题易对箔材表面造成缺陷。视觉方案主要进行幅宽、料长等多个尺寸测量',
                     details: '使用2.5D技术路线成像，使用深度学习+传统算法的方式进行表面缺陷检测，输出缺陷信息，有助于指导后续分切工艺，节约成本。',
@@ -1341,9 +1343,9 @@
                     categoryColor: 'orange',
                     icon: 'fa-mobile-alt',
                     images: [
-                        'https://picsum.photos/seed/3c1/600/400',
-                        'https://picsum.photos/seed/3c2/600/400',
-                        'https://picsum.photos/seed/3c3/600/400'
+                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkk2pkJ2BKnLrjYyx20ysXAAGc2iakHgACUh8AAvNfIVeNF18qbKVJhz0E.jpg',
+                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkkWpkJ16Aded9EMGJYFx426UQqde5AAJQHwAC818hV0I5ho9mBWyQPQQ.jpg',
+                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkkmpkJ19Y4b_OlDSbsGayMdwUZHuHAAJRHwAC818hV7Y6hXUQK806PQQ.jpg'
                     ],
                     description: '该项目在自动化生产的设备上。通过，利用机械手将CG盖板上料，相机拍照后，引导机械手进行抓取后边缘涂黑。提高盖板的上料精度，为后续的自动喷涂动作提供了精度保障，提高了设备喷涂位置的精度',
                     details: '2D 引导机械臂定位抓取，由于对抓取精度有要求，硬件视野较小，需要通过特殊的方式计算像素点位',
@@ -1360,9 +1362,8 @@
                     categoryColor: 'purple',
                     icon: 'fa-mobile-alt',
                     images: [
-                        'https://picsum.photos/seed/3c1/600/400',
-                        'https://picsum.photos/seed/3c2/600/400',
-                        'https://picsum.photos/seed/3c3/600/400'
+                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJklWpkJ5ExdcBwSGsrvdM0V4u6K8DaAAJUHwAC818hV1RRPVBAoOBoPQQ.jpg',
+                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJklGpkJ5D95VJBmA4aFNXjn49Kn8M2AAJTHwAC818hVyQRsBllXHXmPQQ.jpg'
                     ],
                     description: '该项目为充电宝组装前的检测，通过智能相机内置AI算法识别盖板内有无掉落螺丝，为紧凑的设备无法架设常规面阵相机的情况提供了一种新的解决思路。防止因掉落螺丝等异物导致充电宝产品异常，保证良好的检测稳定性是该行业检测的聚焦之点。',
                     details: '设备无冗余空间可架设面阵相机加镜头光源的搭配，使用嵌入式集成度高的智能相机解决客户痛点',
@@ -1371,16 +1372,16 @@
                         { label: '硬件系统', value: '智能相机' }
                     ]
                 },
-                                {
+                {
                     id: 8,
                     title: '方壳电池焊接外观检3D',
                     category: '锂电行业',
                     categoryColor: 'cyan',
                     icon: 'fa-mobile-alt',
                     images: [
-                        'https://picsum.photos/seed/3c1/600/400',
-                        'https://picsum.photos/seed/3c2/600/400',
-                        'https://picsum.photos/seed/3c3/600/400'
+                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkmGpkJ7VXzgnBop4laON8a5VosN1zAAJXHwAC818hVwEQN7U4TvRJPQQ.jpg',
+                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJklmpkJ7RmSOsiAkYZXwaczF9gnnLQAAJVHwAC818hVwaevXRUSoAAAT0E.jpg',
+                        'https://img2.nloln.de/file/BQACAgUAAyEGAASLVN5eAAJkl2pkJ7UTj7Vg_4ojKWHzs3XD7wXrAAJWHwAC818hV0GyC6Pk2gERPQQ.jpg'
                     ],
                     description: '随着新能源车需求的持续增长，锂电池在新能源汽车行业的应用前景广阔。目前锂电池包括硬壳和软包电池，硬壳则可分为圆柱电池和方形电池。其中方形电池凭借其充放电倍率、循环寿命、安全性等方面的优势，成为一种主流的电池封装应用。',
                     details: '电芯入壳后进行预点焊，检测焊缝宽度和台阶高度，焊接缝隙狭窄，检测精度要求高；通过深度学习图像分割算法，可兼容不同背景的样本，对于相似缺陷，在标注上赋予忽略以加大采样，最终能快速精准的获得缺陷的位置及其类别标签',
