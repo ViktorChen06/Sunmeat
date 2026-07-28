@@ -4,27 +4,26 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>智能相机 - 产品详情 | 盛美特科技</title>
+    <title>智能相机 - 产品介绍 | 盛美特科技</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
-        /* 可以复用主页的一些样式，保持品牌一致性 */
-        .gradient-text {
-            background: linear-gradient(135deg, #60a5fa, #2563eb, #7c3aed);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        /* ===== 全局样式 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .product-card {
-            transition: all 0.3s ease;
+        html {
+            scroll-behavior: smooth;
         }
 
-        .product-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
+        /* ===== 导航栏 ===== */
         .navbar {
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -46,15 +45,94 @@
         .navbar-scrolled .logo-text {
             color: #1e293b;
         }
+
+        /* ===== 标签页切换 ===== */
+        .tab-btn {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        /* .tab-btn::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2.5px;
+            background: #2563eb;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .tab-btn.active::after {
+            width: 60%;
+        } */
+
+        .tab-btn.active {
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+        .tab-btn:not(.active) {
+            color: #94a3b8;
+        }
+
+        .tab-btn:not(.active):hover {
+            color: #475569;
+        }
+
+        .tab-panel {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== 产品卡片 ===== */
+        .product-card {
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        /* ===== 表格样式 ===== */
+        .spec-table tr {
+            transition: background 0.2s;
+        }
+
+        .spec-table tr:hover {
+            background: #f8fafc;
+        }
     </style>
 </head>
 
 <body>
 
-    <!-- ===== 导航栏 (与主页保持一致) ===== -->
+    <!-- ============================================================ -->
+    <!-- 导航栏 -->
+    <!-- ============================================================ -->
     <nav id="navbar" class="navbar fixed top-0 left-0 right-0 z-50 px-6 py-4 bg-white/95 shadow-sm">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <a href="../index.html" class="flex items-center gap-2.5 group">
+            <a href="/index.html" class="flex items-center gap-2.5 group">
                 <div
                     class="w-9 h-9 bg-gradient-to-br from-blue-600 to-blue-500 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/25">
                     <i class="fas fa-eye text-white text-sm"></i>
@@ -62,173 +140,411 @@
                 <span class="logo-text text-slate-900 font-bold text-lg tracking-tight">Sunmeat 盛美特</span>
             </a>
             <div class="hidden md:flex items-center gap-8">
-                <a href="../index.html"
+                <a href="/index.html#hero"
                     class="nav-link text-slate-600 hover:text-blue-600 text-sm font-medium transition-colors">首页</a>
-                <a href="../index.html#business"
+                <a href="/index.html#business"
                     class="nav-link text-slate-600 hover:text-blue-600 text-sm font-medium transition-colors">业务范围</a>
-                <a href="../index.html#products"
+                <a href="/index.html#products"
                     class="nav-link text-slate-600 hover:text-blue-600 text-sm font-medium transition-colors">产品中心</a>
-                <a href="../index.html#cases"
+                <a href="/index.html#cases"
                     class="nav-link text-slate-600 hover:text-blue-600 text-sm font-medium transition-colors">行业案例</a>
-                <a href="../index.html#about"
+                <a href="/index.html#about"
                     class="nav-link text-slate-600 hover:text-blue-600 text-sm font-medium transition-colors">关于我们</a>
             </div>
             <div class="flex items-center gap-3">
-              
+
             </div>
         </div>
     </nav>
 
-    <!-- ===== 产品详情主内容 ===== -->
-    <main class="pt-24 pb-16">
+    <!-- ============================================================ -->
+    <!-- 主内容 -->
+    <!-- ============================================================ -->
+    <main class="pt-24 pb-16 bg-slate-50/50">
         <div class="max-w-7xl mx-auto px-6">
-            <!-- 面包屑导航 -->
-            <nav class="text-sm text-slate-400 mb-8">
-                <a href="../index.html#hero" class="hover:text-blue-600">首页</a>
+
+            <!-- ===== 面包屑 ===== -->
+            <nav class="text-sm text-slate-400 mb-6">
+                <a href="/index.html" class="hover:text-blue-600 transition">首页</a>
                 <span class="mx-2">/</span>
-                <a href="../index.html#products" class="hover:text-blue-600">产品中心</a>
+                <a href="/index.html#products" class="hover:text-blue-600 transition">产品中心</a>
                 <span class="mx-2">/</span>
-                <span class="text-slate-600">智能相机</span>
+                <span class="text-slate-600 font-medium">智能相机</span>
             </nav>
 
-            <!-- 产品概览 -->
-            <div class="flex flex-col lg:flex-row gap-12 mb-16">
-                <!-- 产品图片 -->
-                <div class="lg:w-1/2">
-                    <div class="bg-slate-100 rounded-3xl overflow-hidden aspect-[4/3] flex items-center justify-center">
-                        <img src="https://www.hikrobotics.com/cn/static/img/d12be6955aff.png" alt="智能相机"
-                            class="w-full h-full object-contain p-8" />
-                    </div>
-                </div>
-                <!-- 产品信息 -->
-                <div class="lg:w-1/2">
-                    <div class="flex items-center gap-3 mb-3">
-                        <span class="px-3 py-1 bg-orange-500 text-white text-xs font-bold rounded-full">NEW</span>
-                        <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full">相机系列</span>
-                    </div>
-                    <h1 class="text-4xl font-bold text-slate-900 mb-2">智能相机</h1>
-                    <p class="text-xl text-slate-500 mb-6">
-                        智能相机视觉传感器兼顾视觉检测系统的丰富性与传感器的简单性，内部植入高精度高效率视觉算法和AI模块，轻松解决各类有无/分类检测应用。超小型化的设计，适应各类机台及紧凑工位应用。</p>
-                    <p class="text-slate-600 mb-8 leading-relaxed">
-                        调试简单，可视化操作，智能相机系列产品包含多种视觉检测算法，可轻松实现各类防错检测，相对于工业相机调试更简单，引导式操作过程，无需编程操作；可视化检测界面，可在触摸屏显示器上设置、编辑和监控。
-                    </p>
-                    <!-- 核心指标 -->
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-                        <div class="bg-slate-50 rounded-xl p-4 text-center">
-                            <div class="text-xl font-bold text-blue-600">有无识别 物料计数</div>
-                            <div class="text-xs text-slate-400">简易场景</div>
+            <!-- ===== 产品概览 ===== -->
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden mb-8">
+                <div class="flex flex-col lg:flex-row gap-8 p-6 md:p-10">
+                    <!-- 左侧：产品图片 -->
+                    <div class="lg:w-2/5">
+                        <div class="bg-white rounded-2xl overflow-hidden aspect-[4/3] flex items-center justify-center">
+                            <img src="https://www.byence.cn/image/product/%E6%99%BA%E8%83%BD%E7%9B%B8%E6%9C%BA.png"
+                                alt="产品" class="w-full h-full object-contain p-6" />
                         </div>
-                        <div class="bg-slate-50 rounded-xl p-4 text-center">
-                            <div class="text-xl font-bold text-blue-600">机身小巧 控制成本</div>
-                            <div class="text-xs text-slate-400">性价比</div>
+                    </div>
+                    <!-- 右侧：产品信息 -->
+                    <div class="lg:w-3/5 flex flex-col justify-center">
+                        <div class="flex items-center gap-3 mb-3 flex-wrap">
+                            <span class="px-3 py-1 bg-orange-500 text-white text-xs font-bold rounded-full">HOT</span>
+                            <span
+                                class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full">相机系列</span>
+                            <span
+                                class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded-full">智能相机</span>
                         </div>
-                        <div class="bg-slate-50 rounded-xl p-4 text-center">
-                            <div class="text-xl font-bold text-blue-600">支持常用通讯协议</div>
-                            <div class="text-xs text-slate-400">丰富通讯</div>
+                        <h1 class="text-3xl md:text-4xl font-bold text-slate-900 mb-2">智能相机</h1>
+                        <p class="text-lg text-slate-500 mb-4">
+                            智能相机视觉传感器兼顾视觉检测系统的丰富性与传感器的简单性，内部植入高精度高效率视觉算法和AI模块，轻松解决各类有无/分类检测应用。超小型化的设计，适应各类机台及紧凑工位应用。</p>
+                        <p class="text-slate-600 leading-relaxed mb-6">
+                            调试简单，可视化操作，智能相机系列产品包含多种视觉检测算法，可轻松实现各类防错检测，相对于工业相机调试更简单，引导式操作过程，无需编程操作；可视化检测界面，可在触摸屏显示器上设置、编辑和监控。
+                        </p>
+                        <!-- 快速指标 -->
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+                            <div class="bg-slate-50 rounded-xl p-3 text-center">
+                                <div class="text-xl font-bold text-blue-600">有无识别 物料计数</div>
+                                <div class="text-[11px] text-slate-400">简易场景</div>
+                            </div>
+                            <div class="bg-slate-50 rounded-xl p-3 text-center">
+                                <div class="text-xl font-bold text-blue-600">机身小巧 控制成本</div>
+                                <div class="text-[11px] text-slate-400">高性价比</div>
+                            </div>
+                            <div class="bg-slate-50 rounded-xl p-3 text-center">
+                                <div class="text-xl font-bold text-blue-600">支持常用通讯协议</div>
+                                <div class="text-[11px] text-slate-400">丰富通讯</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- 技术规格 -->
-            <div class="mb-16">
-                <h2 class="text-3xl font-bold text-slate-900 mb-6">产品优势</h2>
-                <div class="bg-slate-50 rounded-2xl overflow-hidden border border-slate-100">
-                    <table class="w-full text-sm">
-                        <tbody>
-                            <tr class="border-b border-slate-100">
-                                <td class="px-6 py-4 font-medium text-slate-600 w-1/3">体积小巧，安装便捷</td>
-                                <td class="px-6 py-4 text-slate-800">整机尺寸小巧，可在狭小空间内自由安装，完美嵌入小型化机台设备。</td>
-                            </tr>
-                            <tr class="border-b border-slate-100">
-                                <td class="px-6 py-4 font-medium text-slate-600">易于使用的客户端</td>
-                                <td class="px-6 py-4 text-slate-800">配置了精心设计的界面与更加易用的视觉工具</td>
-                            </tr>
-                            <tr class="border-b border-slate-100">
-                                <td class="px-6 py-4 font-medium text-slate-600">快速部署</td>
-                                <td class="px-6 py-4 text-slate-800">方案搭建简单，对使用人员专业度要求低，调试要求更低</td>
-                            </tr>
-                            <tr class="border-b border-slate-100">
-                                <td class="px-6 py-4 font-medium text-slate-600">调焦方式</td>
-                                <td class="px-6 py-4 text-slate-800">支持机械调焦与电动调焦，调焦更便捷</td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <!-- ===== 标签页切换区域 ===== -->
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
+                <!-- 标签页导航 -->
+                <div class="flex border-b border-slate-100 px-6 md:px-10 pt-4 gap-2 md:gap-6 overflow-x-auto">
+                    <button class="tab-btn active text-sm md:text-base py-3 whitespace-nowrap" data-tab="specs">
+                        <i class="fas fa-table mr-2 text-blue-500"></i>技术规格
+                    </button>
+                    <button class="tab-btn text-sm md:text-base py-3 whitespace-nowrap" data-tab="applications">
+                        <i class="fas fa-industry mr-2 text-emerald-500"></i>应用场景
+                    </button>
+                    <button class="tab-btn text-sm md:text-base py-3 whitespace-nowrap" data-tab="advantages">
+                        <i class="fas fa-star mr-2 text-amber-500"></i>产品优势
+                    </button>
+                </div>
+
+                <!-- ===== 面板1：技术规格 ===== -->
+                <div id="panel-specs" class="tab-panel active p-6 md:p-10">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">系列产品参数规格</h2>
+                    <div class="overflow-x-auto">
+                        <table class="spec-table w-full text-sm border-collapse">
+                            <tbody>
+                                <tr class="border-b border-slate-100">
+                                    <td class="py-4 pr-8 font-medium text-slate-600 w-1/3">传感器类型</td>
+                                    <td class="py-4 text-slate-800">CMOS 全局快门（Rolling Shutter） </td>
+                                </tr>
+                                <tr class="border-b border-slate-100">
+                                    <td class="py-4 pr-8 font-medium text-slate-600">分辨率范围</td>
+                                    <td class="py-4 text-slate-800">111111</td>
+                                </tr>
+                                <tr class="border-b border-slate-100">
+                                    <td class="py-4 pr-8 font-medium text-slate-600">帧率范围</td>
+                                    <td class="py-4 text-slate-800">222222</td>
+                                </tr>
+                                <tr class="border-b border-slate-100">
+                                    <td class="py-4 pr-8 font-medium text-slate-600">数据接口</td>
+                                    <td class="py-4 text-slate-800">1111112
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-slate-100">
+                                    <td class="py-4 pr-8 font-medium text-slate-600">防护等级</td>
+                                    <td class="py-4 text-slate-800">2222333 </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 pr-8 font-medium text-slate-600">工作温度</td>
+                                    <td class="py-4 text-slate-800">3344444</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- 产品列表 -->
+                    <h3 class="text-xl font-bold text-slate-900 mt-10 mb-4">产品列表</h3>
+                    <div class="overflow-x-auto -mx-10 md:mx-0">
+                        <table class="w-full text-xs md:text-sm border-collapse min-w-[640px]">
+                            <thead>
+                                <tr class="bg-slate-100 text-center">
+                                    <th
+                                        class="px-3 md:px-4 py-2 md:py-3 font-medium text-slate-600 text-xs uppercase tracking-wider whitespace-nowrap">
+                                        产品性能</th>
+                                    <th
+                                        class="px-3 md:px-4 py-2 md:py-3 font-medium text-slate-600 text-xs uppercase tracking-wider whitespace-nowrap">
+                                        产品类型</th>
+                                    <th
+                                        class="px-3 md:px-4 py-2 md:py-3 font-medium text-slate-600 text-xs uppercase tracking-wider whitespace-nowrap">
+                                        分辨率</th>
+                                    <th
+                                        class="px-3 md:px-4 py-2 md:py-3 font-medium text-slate-600 text-xs uppercase tracking-wider whitespace-nowrap">
+                                        最大帧率</th>
+                                    <th
+                                        class="px-3 md:px-4 py-2 md:py-3 font-medium text-slate-600 text-xs uppercase tracking-wider whitespace-nowrap">
+                                        数据接口</th>
+                                    <th
+                                        class="px-3 md:px-4 py-2 md:py-3 font-medium text-slate-600 text-xs uppercase tracking-wider whitespace-nowrap">
+                                        状态</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- 行内容，同样调整内边距 -->
+                                <tr class="border-b border-slate-100 hover:bg-slate-50 transition text-center">
+                                    <td
+                                        class="px-3 md:px-4 py-2 md:py-3 text-slate-800 font-mono text-[11px] md:text-xs whitespace-nowrap">
+                                        </td>
+                                    <td class="px-3 md:px-4 py-2 md:py-3 text-slate-600 text-xs"></td>
+                                    <td class="px-3 md:px-4 py-2 md:py-3 text-slate-600 text-xs"></td>
+                                    <td class="px-3 md:px-4 py-2 md:py-3 text-slate-600 text-xs"></td>
+                                    <td class="px-3 md:px-4 py-2 md:py-3 text-slate-600 text-xs"></td>
+                                    <td class="px-3 md:px-4 py-2 md:py-3"><span
+                                            class="px-2 py-0.5 bg-emerald-100 text-emerald-700 text-[10px] rounded-full">在售</span>
+                                    </td>
+                                </tr>
+                                <!-- 其他行类似 -->
+                                <tr class="border-b border-slate-100 hover:bg-slate-50 transition text-center">
+                                    <td
+                                        class="px-3 md:px-4 py-2 md:py-3 text-slate-800 font-mono text-[11px] md:text-xs whitespace-nowrap">
+                                        333333</td>
+                                    <td class="px-3 md:px-4 py-2 md:py-3 text-slate-600 text-xs">44444</td>
+                                    <td class="px-3 md:px-4 py-2 md:py-3 text-slate-600 text-xs">5555</td>
+                                    <td class="px-3 md:px-4 py-2 md:py-3 text-slate-600 text-xs">6666</td>
+                                    <td class="px-3 md:px-4 py-2 md:py-3 text-slate-600 text-xs">66666</td>
+                                    <td class="px-3 md:px-4 py-2 md:py-3"><span
+                                            class="px-2 py-0.5 bg-emerald-100 text-emerald-700 text-[10px] rounded-full">在售</span>
+                                    </td>
+                                </tr>
+                                <!-- 其他行类似 -->
+                                <tr class="border-b border-slate-100 hover:bg-slate-50 transition text-center">
+                                    <td
+                                        class="px-3 md:px-4 py-2 md:py-3 text-slate-800 font-mono text-[11px] md:text-xs whitespace-nowrap">
+                                        SMT-AG系列</td>
+                                    <td class="px-3 md:px-4 py-2 md:py-3 text-slate-600 text-xs">55555</td>
+                                    <td class="px-3 md:px-4 py-2 md:py-3 text-slate-600 text-xs">66666</td>
+                                    <td class="px-3 md:px-4 py-2 md:py-3 text-slate-600 text-xs">777777</td>
+                                    <td class="px-3 md:px-4 py-2 md:py-3 text-slate-600 text-xs">888888</td>
+                                    <td class="px-3 md:px-4 py-2 md:py-3"><span
+                                            class="px-2 py-0.5 bg-emerald-100 text-emerald-700 text-[10px] rounded-full">在售</span>
+                                    </td>
+                                </tr>
+                                <!-- 其他行类似 -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+                <!-- ===== 面板2：场景应用 ===== -->
+                <div id="panel-applications" class="tab-panel p-6 md:p-10">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">场景应用</h2>
+                    <p class="text-slate-500 mb-8">我司智能相机广泛应用于以下工业场景：</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+                            <h3 class="text-lg font-bold text-slate-900 mb-2">22222</h3>
+                            <p class="text-sm text-slate-500 leading-relaxed">6666666</p>
+                        </div>
+                        <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+                            <h3 class="text-lg font-bold text-slate-900 mb-2">555555</h3>
+                            <p class="text-sm text-slate-500 leading-relaxed">6666666</p>
+                        </div>
+                        <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+                            <h3 class="text-lg font-bold text-slate-900 mb-2">77777</h3>
+                            <p class="text-sm text-slate-500 leading-relaxed">77777</p>
+                        </div>
+                        <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+                            <h3 class="text-lg font-bold text-slate-900 mb-2">666666</h3>
+                            <p class="text-sm text-slate-500 leading-relaxed">99999999</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== 面板3：产品优势 ===== -->
+                <div id="panel-advantages" class="tab-panel p-6 md:p-10">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">产品优势</h2>
+                    <div class="bg-slate-50 rounded-2xl overflow-hidden border border-slate-100">
+                        <table class="w-full text-sm">
+                            <tbody>
+                                <tr class="border-b border-slate-100">
+                                    <td class="px-6 py-4 font-medium text-slate-600 w-1/3">体积小巧，安装便捷</td>
+                                    <td class="px-6 py-4 text-slate-800">
+                                        整机尺寸小巧，可在狭小空间内自由安装，完美嵌入小型化机台设备。
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-slate-100">
+                                    <td class="px-6 py-4 font-medium text-slate-600">易于使用的客户端</td>
+                                    <td class="px-6 py-4 text-slate-800">
+                                        配置了精心设计的界面与更加易用的视觉工具
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-slate-100">
+                                    <td class="px-6 py-4 font-medium text-slate-600">快速部署</td>
+                                    <td class="px-6 py-4 text-slate-800">方案搭建简单，对使用人员专业度要求低，调试要求更低</td>
+                                </tr>
+                                <tr class="border-b border-slate-100">
+                                    <td class="px-6 py-4 font-medium text-slate-600">调焦方式</td>
+                                    <td class="px-6 py-4 text-slate-800">支持机械调焦与电动调焦，调焦更便捷</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
-            <!-- 相关产品推荐 -->
-            <div>
-                <h2 class="text-3xl font-bold text-slate-900 mb-6">相关产品推荐</h2>
+            <!-- ===== 相关产品推荐 ===== -->
+            <section class="mt-12">
+                <h2 class="text-2xl font-bold text-slate-900 mb-6">相关产品推荐</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- 推荐产品卡片 1 -->
-                    <div class="product-card bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
+                    <div
+                        class="product-card bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-md transition">
                         <div
-                            class="aspect-[4/3] bg-gradient-to-br from-purple-50 to-indigo-50 flex items-center justify-center p-4">
-                            <i class="fas fa-brain text-6xl text-purple-400"></i>
+                            class="aspect-[4/3] bg-gradient-to-br from-purple-50 to-indigo-50 flex items-center justify-center p-6">
+                            <img src="https://www.byence.cn/image/product/%E6%B5%B7%E5%BA%B7%E5%B7%A5%E4%B8%9A%E7%9B%B8%E6%9C%BA.png"
+                                alt="工业相机" class="w-full h-full object-contain p-6" />
                         </div>
                         <div class="p-5">
                             <span
                                 class="inline-block px-2 py-0.5 bg-emerald-500 text-white text-[10px] font-bold rounded-full mb-2">NEW</span>
                             <h3 class="text-base font-bold text-slate-900">工业相机</h3>
-                            <p class="text-xs text-slate-400 mt-1">分辨率全、接口丰富、工艺严苛</p>
-                            <a href="../Product/Cam.html" class="inline-flex items-center gap-1 text-xs font-semibold ...">
-                                了解更多 <i class="fas fa-arrow-right text-[10px]"></i>
+                            <p class="text-xs text-slate-400 mt-1">专为工业应用而设计，提供行业领先的性能和可靠性，全新硬件平台实现更低功耗</p>
+                            <a href="../Product/Cam.html"
+                                class="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 mt-3 hover:gap-2 transition">
+                                查看详情 <i class="fas fa-arrow-right text-[10px]"></i>
                             </a>
                         </div>
                     </div>
-                    <!-- 推荐产品卡片 2 -->
-                    <div class="product-card bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
+                    <div
+                        class="product-card bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-md transition">
                         <div
-                            class="aspect-[4/3] bg-gradient-to-br from-indigo-50 to-blue-50 flex items-center justify-center p-4">
-                            <i class="fas fa-cube text-6xl text-indigo-400"></i>
+                            class="aspect-[4/3] bg-gradient-to-br from-indigo-50 to-blue-50 flex items-center justify-center p-6">
+                            <img src="https://www.byence.cn/image/product/%E9%95%9C%E5%A4%B4.png" alt="镜头"
+                                class="w-full h-full object-contain p-6" />
                         </div>
                         <div class="p-5">
                             <span
-                                class="inline-block px-2 py-0.5 bg-emerald-500 text-white text-[10px] font-bold rounded-full mb-2">NEW</span>
-                            <h3 class="text-base font-bold text-slate-900">3D激光轮廓传感器</h3>
-                            <p class="text-xs text-slate-400 mt-1">3D视觉测量相机，实现物体三维重建和深度检测</p>
-                            <a href="../Product/Cam.html" class="inline-flex items-center gap-1 text-xs font-semibold ...">
-                                了解更多 <i class="fas fa-arrow-right text-[10px]"></i>
+                                class="inline-block px-2 py-0.5 bg-emerald-500 text-white text-[10px] font-bold rounded-full mb-2">HOT</span>
+                            <h3 class="text-base font-bold text-slate-900">相机镜头</h3>
+                            <p class="text-xs text-slate-400 mt-1">高性能、低成本，具备高清晰度、更好的图像中心边缘清晰度一致性以及更高的相对照度，工业应用的绝佳之选</p>
+                            <a href="../Product/Cam.html"
+                                class="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 mt-3 hover:gap-2 transition">
+                                查看详情 <i class="fas fa-arrow-right text-[10px]"></i>
                             </a>
                         </div>
                     </div>
-                    <!-- 推荐产品卡片 3 -->
-                    <div class="product-card bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
+                    <div
+                        class="product-card bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-md transition">
                         <div
-                            class="aspect-[4/3] bg-gradient-to-br from-cyan-50 to-sky-50 flex items-center justify-center p-4">
-                            <i class="fas fa-cogs text-6xl text-cyan-400"></i>
+                            class="aspect-[4/3] bg-gradient-to-br from-cyan-50 to-sky-50 flex items-center justify-center p-6">
+                            <img src="https://www.byence.cn/image/product/%E8%A7%86%E8%A7%89%E7%BB%84%E4%BB%B6.png"
+                                alt="产品" class="w-full h-full object-contain p-6" />
                         </div>
                         <div class="p-5">
                             <h3 class="text-base font-bold text-slate-900">视觉组件</h3>
-                            <p class="text-xs text-slate-400 mt-1">高性价比、品类齐全、服务完善</p>
-                            <a href="../Product/Cam.html" class="inline-flex items-center gap-1 text-xs font-semibold ...">
-                                了解更多 <i class="fas fa-arrow-right text-[10px]"></i>
+                            <p class="text-xs text-slate-400 mt-1">提供丰富的机器视觉相关的电源线、I/O控制线、数据传输线产品，满足用户各类应用所需。</p>
+                            <a href="../Product/Cam.html"
+                                class="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 mt-3 hover:gap-2 transition">
+                                查看详情 <i class="fas fa-arrow-right text-[10px]"></i>
                             </a>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
+
+            <!-- ===== 资料下载 ===== -->
+            <section id="download" class="mt-12 bg-white rounded-3xl shadow-sm border border-slate-100 p-6 md:p-10">
+                <h2 class="text-2xl font-bold text-slate-900 mb-6">资料下载</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <a href="https://www.hikrobotics.com/cn/machinevision/service/download/?module=0"
+                        class="flex items-center gap-4 p-4 bg-slate-50 rounded-xl hover:bg-slate-100 transition border border-slate-100">
+                        <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm font-medium text-slate-800">机器视觉工业相机客户端 MVS</div>
+                            <div class="text-xs text-slate-400">V4.6.3 (Windows) · 386MB</div>
+                        </div>
+                    </a>
+                    <a href="https://www.hikrobotics.com/cn/machinevision/service/download/?module=0"
+                        class="flex items-center gap-4 p-4 bg-slate-50 rounded-xl hover:bg-slate-100 transition border border-slate-100">
+                        <div
+                            class="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center text-emerald-600">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm font-medium text-slate-800">机器视觉软件平台</div>
+                            <div class="text-xs text-slate-400">V3.1.0 (Windows/Linux) · 512MB</div>
+                        </div>
+                    </a>
+                </div>
+            </section>
         </div>
     </main>
 
-    <!-- ===== 页脚 (与主页保持一致) ===== -->
-    <footer class="bg-slate-900 text-slate-400 py-12 mt-12">
+    <!-- ============================================================ -->
+    <!-- 页脚 -->
+    <!-- ============================================================ -->
+    <footer class="bg-slate-900 text-slate-400 py-12 mt-8">
         <div class="max-w-7xl mx-auto px-6 text-center">
-            <p>© 2026 深圳市盛美特科技有限公司. All rights reserved.</p>
+            <div class="flex items-center justify-center gap-2 mb-4">
+                <div
+                    class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white text-sm font-bold">
+                    IV</div>
+                <span class="text-white font-bold text-lg">深圳市盛美特科技有限公司</span>
+            </div>
+            <p class="text-sm">© 2026 All rights reserved.</p>
+            <p class="text-xs text-slate-500 mt-1">高精度视觉传感器与工业相机解决方案提供商</p>
         </div>
     </footer>
 
+    <!-- ============================================================ -->
+    <!-- JavaScript：标签页切换 + 导航栏滚动 -->
+    <!-- ============================================================ -->
     <script>
-        // 导航栏滚动效果 (与主页一致)
-        window.addEventListener('scroll', function () {
-            const nav = document.getElementById('navbar');
-            if (window.pageYOffset > 20) {
-                nav.classList.add('navbar-scrolled');
-            } else {
-                nav.classList.remove('navbar-scrolled');
-            }
-        });
+        (function () {
+            'use strict';
+
+            // ===== 1. 标签页切换 =====
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabPanels = {
+                specs: document.getElementById('panel-specs'),
+                applications: document.getElementById('panel-applications'),
+                advantages: document.getElementById('panel-advantages')
+            };
+
+            tabBtns.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    // 移除所有按钮的 active 状态
+                    tabBtns.forEach(function (b) { b.classList.remove('active'); });
+                    btn.classList.add('active');
+
+                    // 隐藏所有面板
+                    Object.values(tabPanels).forEach(function (panel) {
+                        panel.classList.remove('active');
+                    });
+
+                    // 显示对应的面板
+                    const tabName = btn.getAttribute('data-tab');
+                    if (tabPanels[tabName]) {
+                        tabPanels[tabName].classList.add('active');
+                    }
+                });
+            });
+
+            // ===== 2. 导航栏滚动变色 =====
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', function () {
+                if (window.pageYOffset > 20) {
+                    navbar.classList.add('navbar-scrolled');
+                } else {
+                    navbar.classList.remove('navbar-scrolled');
+                }
+            });
+
+        })();
     </script>
 
 </body>
